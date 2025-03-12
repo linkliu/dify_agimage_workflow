@@ -1,0 +1,452 @@
+app:
+  description: ''
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  mode: workflow
+  name: comfy_flux_ipadapter_i2i
+  use_icon_as_answer_icon: false
+kind: app
+version: 0.1.5
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions: []
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - remote_url
+      - local_file
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 1
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInIteration: false
+        sourceType: http-request
+        targetType: code
+      id: 1740386333394-source-1740388051074-target
+      selected: false
+      source: '1740386333394'
+      sourceHandle: source
+      target: '1740388051074'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: code
+        targetType: end
+      id: 1740388051074-source-1740387438835-target
+      selected: false
+      source: '1740388051074'
+      sourceHandle: source
+      target: '1740387438835'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: start
+        targetType: code
+      id: 1739173394551-source-1740389063122-target
+      source: '1739173394551'
+      sourceHandle: source
+      target: '1740389063122'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: start
+        targetType: code
+      id: 1739173394551-source-17403891278880-target
+      source: '1739173394551'
+      sourceHandle: source
+      target: '17403891278880'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: start
+        targetType: code
+      id: 1739173394551-source-1740389164522-target
+      source: '1739173394551'
+      sourceHandle: source
+      target: '1740389164522'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: code
+        targetType: http-request
+      id: 1740389063122-source-1740386333394-target
+      source: '1740389063122'
+      sourceHandle: source
+      target: '1740386333394'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: code
+        targetType: http-request
+      id: 17403891278880-source-1740386333394-target
+      source: '17403891278880'
+      sourceHandle: source
+      target: '1740386333394'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: code
+        targetType: http-request
+      id: 1740389164522-source-1740386333394-target
+      source: '1740389164522'
+      sourceHandle: source
+      target: '1740386333394'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        desc: ''
+        selected: false
+        title: 开始
+        type: start
+        variables:
+        - label: prompt
+          max_length: 3000
+          options: []
+          required: true
+          type: paragraph
+          variable: prompt
+        - allowed_file_extensions: []
+          allowed_file_types:
+          - image
+          allowed_file_upload_methods:
+          - local_file
+          - remote_url
+          label: adapter_img
+          max_length: 48
+          options: []
+          required: true
+          type: file
+          variable: adapter_img
+        - allowed_file_extensions: []
+          allowed_file_types:
+          - image
+          allowed_file_upload_methods:
+          - local_file
+          - remote_url
+          label: origin_img
+          max_length: 48
+          options: []
+          required: true
+          type: file
+          variable: origin_img
+      height: 141
+      id: '1739173394551'
+      position:
+        x: 219.02987728513745
+        y: 248.0683655168608
+      positionAbsolute:
+        x: 219.02987728513745
+        y: 248.0683655168608
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 243
+    - data:
+        authorization:
+          config: null
+          type: no-auth
+        body:
+          data:
+          - id: key-value-1
+            key: ''
+            type: text
+            value: "{\"prompt\":{\n  \"8\": {\n    \"inputs\": {\n      \"samples\"\
+              : [\n        \"105\",\n        0\n      ],\n      \"vae\": [\n     \
+              \   \"10\",\n        0\n      ]\n    },\n    \"class_type\": \"VAEDecode\"\
+              ,\n    \"_meta\": {\n      \"title\": \"VAE解码\"\n    }\n  },\n  \"9\"\
+              : {\n    \"inputs\": {\n      \"filename_prefix\": \"Flux_Lora\",\n\
+              \      \"images\": [\n        \"8\",\n        0\n      ]\n    },\n \
+              \   \"class_type\": \"SaveImage\",\n    \"_meta\": {\n      \"title\"\
+              : \"保存图像\"\n    }\n  },\n  \"10\": {\n    \"inputs\": {\n      \"vae_name\"\
+              : \"FLUX.1-vae.sft\"\n    },\n    \"class_type\": \"VAELoader\",\n \
+              \   \"_meta\": {\n      \"title\": \"VAE加载器\"\n    }\n  },\n  \"11\"\
+              : {\n    \"inputs\": {\n      \"clip_name1\": \"clip_l.safetensors\"\
+              ,\n      \"clip_name2\": \"t5xxl_fp16.safetensors\",\n      \"type\"\
+              : \"flux\",\n      \"device\": \"default\"\n    },\n    \"class_type\"\
+              : \"DualCLIPLoader\",\n    \"_meta\": {\n      \"title\": \"双CLIP加载器\"\
+              \n    }\n  },\n  \"12\": {\n    \"inputs\": {\n      \"unet_name\":\
+              \ \"flux1-FP8-dev.safetensors\",\n      \"weight_dtype\": \"fp8_e4m3fn\"\
+              \n    },\n    \"class_type\": \"UNETLoader\",\n    \"_meta\": {\n  \
+              \    \"title\": \"UNET加载器\"\n    }\n  },\n  \"78\": {\n    \"inputs\"\
+              : {\n      \"ipadapter\": \"InstantX_FLUX.1-dev-IP-Adapter.bin\",\n\
+              \      \"clip_vision\": \"google/siglip-so400m-patch14-384\",\n    \
+              \  \"provider\": \"cuda\"\n    },\n    \"class_type\": \"IPAdapterFluxLoader\"\
+              ,\n    \"_meta\": {\n      \"title\": \"Load IPAdapter Flux Model\"\n\
+              \    }\n  },\n  \"79\": {\n    \"inputs\": {\n      \"weight\": 0.9,\n\
+              \      \"start_percent\": 0,\n      \"end_percent\": 1,\n      \"model\"\
+              : [\n        \"12\",\n        0\n      ],\n      \"ipadapter_flux\"\
+              : [\n        \"78\",\n        0\n      ],\n      \"image\": [\n    \
+              \    \"109\",\n        0\n      ]\n    },\n    \"class_type\": \"ApplyIPAdapterFlux\"\
+              ,\n    \"_meta\": {\n      \"title\": \"Apply IPAdapter Flux Model\"\
+              \n    }\n  },\n  \"87\": {\n    \"inputs\": {\n      \"text\": \"{{#1739173394551.prompt#}}\"\
+              ,\n      \"clip\": [\n        \"11\",\n        0\n      ]\n    },\n\
+              \    \"class_type\": \"CLIPTextEncode\",\n    \"_meta\": {\n      \"\
+              title\": \"CLIP文本编码器\"\n    }\n  },\n  \"91\": {\n    \"inputs\": {\n\
+              \      \"pixels\": [\n        \"95\",\n        0\n      ],\n      \"\
+              vae\": [\n        \"10\",\n        0\n      ]\n    },\n    \"class_type\"\
+              : \"VAEEncode\",\n    \"_meta\": {\n      \"title\": \"VAE编码\"\n   \
+              \ }\n  },\n  \"95\": {\n    \"inputs\": {\n      \"upscale_method\"\
+              : \"nearest-exact\",\n      \"width\": 1024,\n      \"height\": 1024,\n\
+              \      \"crop\": \"disabled\",\n      \"image\": [\n        \"108\"\
+              ,\n        0\n      ]\n    },\n    \"class_type\": \"ImageScale\",\n\
+              \    \"_meta\": {\n      \"title\": \"图像缩放\"\n    }\n  },\n  \"105\"\
+              : {\n    \"inputs\": {\n      \"seed\": [\n        \"107\",\n      \
+              \  0\n      ],\n      \"steps\": 20,\n      \"cfg\": 3.5,\n      \"\
+              sampler_name\": \"euler_ancestral\",\n      \"scheduler\": \"simple\"\
+              ,\n      \"denoise\": 0.9,\n      \"model\": [\n        \"79\",\n  \
+              \      0\n      ],\n      \"positive\": [\n        \"87\",\n       \
+              \ 0\n      ],\n      \"negative\": [\n        \"106\",\n        0\n\
+              \      ],\n      \"latent_image\": [\n        \"91\",\n        0\n \
+              \     ]\n    },\n    \"class_type\": \"KSampler\",\n    \"_meta\": {\n\
+              \      \"title\": \"K采样器\"\n    }\n  },\n  \"106\": {\n    \"inputs\"\
+              : {\n      \"text\": \"\",\n      \"clip\": [\n        \"11\",\n   \
+              \     0\n      ]\n    },\n    \"class_type\": \"CLIPTextEncode\",\n\
+              \    \"_meta\": {\n      \"title\": \"CLIP文本编码器\"\n    }\n  },\n  \"\
+              107\": {\n    \"inputs\": {\n      \"seed\":{{#1740389164522.seed#}}\n\
+              \    },\n    \"class_type\": \"easy seed\",\n    \"_meta\": {\n    \
+              \  \"title\": \"随机种\"\n    }\n  },\n  \"108\": {\n    \"inputs\": {\n\
+              \      \"url\": \"{{#17403891278880.ori_http_path#}}\"\n    },\n   \
+              \ \"class_type\": \"LoadImagesFromURL\",\n    \"_meta\": {\n      \"\
+              title\": \"加载图像(URL)（原图）\"\n    }\n  },\n  \"109\": {\n    \"inputs\"\
+              : {\n      \"url\": \"{{#1740389063122.ada_http_path#}}\"\n    },\n\
+              \    \"class_type\": \"LoadImagesFromURL\",\n    \"_meta\": {\n    \
+              \  \"title\": \"加载图像(URL)（参考图）\"\n    }\n  }\n}\n}"
+          type: json
+        desc: ''
+        headers: Content-Type:application/json
+        method: post
+        params: ''
+        retry_config:
+          max_retries: 3
+          retry_enabled: true
+          retry_interval: 100
+        selected: false
+        timeout:
+          max_connect_timeout: 0
+          max_read_timeout: 0
+          max_write_timeout: 0
+        title: HTTP 请求
+        type: http-request
+        url: http://172.16.50.118:8188/prompt
+        variables: []
+      height: 134
+      id: '1740386333394'
+      position:
+        x: 919.1191318136719
+        y: 257.09026688412627
+      positionAbsolute:
+        x: 919.1191318136719
+        y: 257.09026688412627
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 243
+    - data:
+        desc: ''
+        outputs:
+        - value_selector:
+          - '1740388051074'
+          - result
+          variable: body
+        selected: false
+        title: 结束
+        type: end
+      height: 89
+      id: '1740387438835'
+      position:
+        x: 1822.168045058274
+        y: 353.6576433485929
+      positionAbsolute:
+        x: 1822.168045058274
+        y: 353.6576433485929
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 243
+    - data:
+        code: "\nimport json\nimport requests\nimport time\ndef main(body: str) ->\
+          \ dict:\n    data= json.loads(body)\n    prompt_id=data[\"prompt_id\"]\n\
+          \    number=data[\"number\"]\n    images=[]\n    image_urls=[]\n    while\
+          \ True:\n        time.sleep(3)\n        data = requests.get(\"http://172.16.50.118:8188/history/\"\
+          +prompt_id).json()\n        if prompt_id in data:\n            status=data[prompt_id][\"\
+          status\"]\n            if status[\"completed\"] and status[\"status_str\"\
+          ]==\"success\":\n                images=data[prompt_id][\"outputs\"][\"\
+          9\"][\"images\"]\n                break\n        else:\n            continue\n\
+          \    for img in images:\n        image_urls.append(\n            \"http://172.16.50.118:8188/view?filename=\"\
+          +img[\"filename\"]+\"&subfolder=\"+img[\"subfolder\"]+\"&type=output\"\n\
+          \        )\n    return {\n        \"result\": image_urls ,\n    }\n"
+        code_language: python3
+        desc: ''
+        outputs:
+          result:
+            children: null
+            type: array[string]
+        retry_config:
+          max_retries: 10
+          retry_enabled: true
+          retry_interval: 2011
+        selected: false
+        title: 代码执行
+        type: code
+        variables:
+        - value_selector:
+          - '1740386333394'
+          - body
+          variable: body
+      height: 78
+      id: '1740388051074'
+      position:
+        x: 1250.9059254056235
+        y: 257.09026688412627
+      positionAbsolute:
+        x: 1250.9059254056235
+        y: 257.09026688412627
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 243
+    - data:
+        code: "def main(re_path: str) -> dict:\n    ht_head_str = \"http://172.16.50.188/static\"\
+          \n    real_url = re_path.replace(\"/app/api/storage/upload_files\", ht_head_str,\
+          \ 1)\n    return {\n        \"ada_http_path\": real_url\n    }\n"
+        code_language: python3
+        desc: ''
+        outputs:
+          ada_http_path:
+            children: null
+            type: string
+        selected: true
+        title: 获取参考图
+        type: code
+        variables:
+        - value_selector:
+          - '1739173394551'
+          - adapter_img
+          - url
+          variable: re_path
+      height: 53
+      id: '1740389063122'
+      position:
+        x: 508.52987728513745
+        y: 238.5683655168608
+      positionAbsolute:
+        x: 508.52987728513745
+        y: 238.5683655168608
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 243
+    - data:
+        code: "def main(re_path: str) -> dict:\n    ht_head_str = \"http://172.16.50.188/static\"\
+          \n    real_url = re_path.replace(\"/app/api/storage/upload_files\", ht_head_str,\
+          \ 1)\n    return {\n        \"ori_http_path\": real_url\n    }\n"
+        code_language: python3
+        desc: ''
+        outputs:
+          ori_http_path:
+            children: null
+            type: string
+        selected: false
+        title: 获取原图
+        type: code
+        variables:
+        - value_selector:
+          - '1739173394551'
+          - origin_img
+          - url
+          variable: re_path
+      height: 53
+      id: '17403891278880'
+      position:
+        x: 508.52987728513745
+        y: 307.9792038108845
+      positionAbsolute:
+        x: 508.52987728513745
+        y: 307.9792038108845
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 243
+    - data:
+        code: "import secrets\n\ndef main() -> dict:\n    seed = secrets.randbelow(999999999999999)\n\
+          \    return {\"seed\": seed}"
+        code_language: python3
+        desc: ''
+        outputs:
+          seed:
+            children: null
+            type: number
+        selected: false
+        title: 获取种子
+        type: code
+        variables: []
+      height: 53
+      id: '1740389164522'
+      position:
+        x: 508.52987728513745
+        y: 400.4792038108845
+      positionAbsolute:
+        x: 508.52987728513745
+        y: 400.4792038108845
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 243
+    viewport:
+      x: -913.8225533585833
+      y: -254.75324733908673
+      zoom: 2

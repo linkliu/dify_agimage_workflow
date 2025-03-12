@@ -1,0 +1,790 @@
+app:
+  description: 贴纸工作流Chat
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  mode: advanced-chat
+  name: 贴纸工作流Chat
+  use_icon_as_answer_icon: false
+kind: app
+version: 0.1.5
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: hello！我是贴纸小助手(^_^)。请输入贴纸的主题以及要生成的数量。数量建议不要超过8噢，不然要等很久。
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInIteration: false
+        sourceType: start
+        targetType: llm
+      id: 1741598935992-source-1741599218791-target
+      source: '1741598935992'
+      sourceHandle: source
+      target: '1741599218791'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: llm
+        targetType: code
+      id: 1741599218791-source-1741599557928-target
+      source: '1741599218791'
+      sourceHandle: source
+      target: '1741599557928'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: llm
+        targetType: code
+      id: 1741599218791-source-1741599561951-target
+      source: '1741599218791'
+      sourceHandle: source
+      target: '1741599561951'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: code
+        targetType: tool
+      id: 1741599557928-source-1741600118401-target
+      source: '1741599557928'
+      sourceHandle: source
+      target: '1741600118401'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: code
+        targetType: tool
+      id: 1741599561951-source-1741600118401-target
+      source: '1741599561951'
+      sourceHandle: source
+      target: '1741600118401'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: tool
+        targetType: code
+      id: 1741600118401-source-1741600163288-target
+      source: '1741600118401'
+      sourceHandle: source
+      target: '1741600163288'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: code
+        targetType: iteration
+      id: 1741600163288-source-1741600194047-target
+      source: '1741600163288'
+      sourceHandle: source
+      target: '1741600194047'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: true
+        iteration_id: '1741600194047'
+        sourceType: iteration-start
+        targetType: tool
+      id: 1741600194047start-source-1741600404727-target
+      source: 1741600194047start
+      sourceHandle: source
+      target: '1741600404727'
+      targetHandle: target
+      type: custom
+      zIndex: 1002
+    - data:
+        isInIteration: true
+        iteration_id: '1741600194047'
+        sourceType: tool
+        targetType: code
+      id: 1741600404727-source-1741600428895-target
+      source: '1741600404727'
+      sourceHandle: source
+      target: '1741600428895'
+      targetHandle: target
+      type: custom
+      zIndex: 1002
+    - data:
+        isInIteration: true
+        iteration_id: '1741600194047'
+        sourceType: code
+        targetType: http-request
+      id: 1741600428895-source-1741600475120-target
+      source: '1741600428895'
+      sourceHandle: source
+      target: '1741600475120'
+      targetHandle: target
+      type: custom
+      zIndex: 1002
+    - data:
+        isInIteration: true
+        iteration_id: '1741600194047'
+        sourceType: code
+        targetType: http-request
+      id: 1741600203544-source-1741600475120-target
+      source: '1741600203544'
+      sourceHandle: source
+      target: '1741600475120'
+      targetHandle: target
+      type: custom
+      zIndex: 1002
+    - data:
+        isInIteration: true
+        iteration_id: '1741600194047'
+        sourceType: http-request
+        targetType: code
+      id: 1741600475120-source-1741600592312-target
+      source: '1741600475120'
+      sourceHandle: source
+      target: '1741600592312'
+      targetHandle: target
+      type: custom
+      zIndex: 1002
+    - data:
+        isInIteration: false
+        sourceType: iteration
+        targetType: code
+      id: 1741600194047-source-1741600672520-target
+      source: '1741600194047'
+      sourceHandle: source
+      target: '1741600672520'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: code
+        targetType: answer
+      id: 1741600672520-source-answer-target
+      source: '1741600672520'
+      sourceHandle: source
+      target: answer
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: true
+        iteration_id: '1741600194047'
+        sourceType: iteration-start
+        targetType: code
+      id: 1741600194047start-source-1741600203544-target
+      source: 1741600194047start
+      sourceHandle: source
+      target: '1741600203544'
+      targetHandle: target
+      type: custom
+      zIndex: 1002
+    - data:
+        isInIteration: false
+        sourceType: code
+        targetType: answer
+      id: 1741600163288-source-1741601682328-target
+      source: '1741600163288'
+      sourceHandle: source
+      target: '1741601682328'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: answer
+        targetType: code
+      id: 1741601682328-source-1741600672520-target
+      source: '1741601682328'
+      sourceHandle: source
+      target: '1741600672520'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        desc: ''
+        selected: false
+        title: 开始
+        type: start
+        variables: []
+      height: 54
+      id: '1741598935992'
+      position:
+        x: 80
+        y: 282
+      positionAbsolute:
+        x: 80
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        answer: '下面是生成的结果：
+
+          {{#1741600672520.markdown_imgs#}}'
+        desc: ''
+        selected: false
+        title: 直接回复
+        type: answer
+        variables: []
+      height: 119
+      id: answer
+      position:
+        x: 4606.704302737551
+        y: 300.6671564229135
+      positionAbsolute:
+        x: 4606.704302737551
+        y: 300.6671564229135
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: Qwen/Qwen2.5-72B-Instruct
+          provider: siliconflow
+        prompt_template:
+        - id: 94d36036-d4f5-4f04-8f22-7811156b1c9f
+          role: system
+          text: '根据用户的输入“{{#sys.query#}}”，将用户输入的主题和数量放在一个一维数组中并返回。
+
+            要求：
+
+            1.只返回数组。
+
+            2.数组中只有主题跟数量，并且数量放在数组的后面。'
+        selected: false
+        title: LLM
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 98
+      id: '1741599218791'
+      position:
+        x: 392
+        y: 257
+      positionAbsolute:
+        x: 392
+        y: 257
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        code: "import re\nimport json\ndef main(array_str) -> dict:\n    tJson = json.loads(array_str)\n\
+          \    return {\n        \"number\":tJson[1]\n    }"
+        code_language: python3
+        desc: ''
+        outputs:
+          number:
+            children: null
+            type: number
+        selected: false
+        title: 数量
+        type: code
+        variables:
+        - value_selector:
+          - '1741599218791'
+          - text
+          variable: array_str
+      height: 54
+      id: '1741599557928'
+      position:
+        x: 929
+        y: 341
+      positionAbsolute:
+        x: 929
+        y: 341
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        code: "import re\nimport json\ndef main(array_str) -> dict:\n    tJson = json.loads(array_str)\n\
+          \    return {\n        \"theme\":tJson[0]\n    }"
+        code_language: python3
+        desc: ''
+        outputs:
+          theme:
+            children: null
+            type: string
+        selected: false
+        title: 主题
+        type: code
+        variables:
+        - value_selector:
+          - '1741599218791'
+          - text
+          variable: array_str
+      height: 54
+      id: '1741599561951'
+      position:
+        x: 929
+        y: 228
+      positionAbsolute:
+        x: 929
+        y: 228
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        provider_id: 2d4114ef-05d3-493b-ae6b-4e22139da4e5
+        provider_name: 贴纸for
+        provider_type: workflow
+        selected: false
+        title: 贴纸for
+        tool_configurations: {}
+        tool_label: 贴纸for
+        tool_name: tiezhi_for
+        tool_parameters:
+          numer:
+            type: variable
+            value:
+            - '1741599557928'
+            - number
+          theme:
+            type: mixed
+            value: '{{#1741599561951.theme#}}'
+        type: tool
+      height: 54
+      id: '1741600118401'
+      position:
+        x: 1577
+        y: 274
+      positionAbsolute:
+        x: 1577
+        y: 274
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        code: "import re\nimport json\ndef main(jsonObj) -> dict:\n    print(jsonObj[0][\"\
+          result\"])\n    return {\n        \"jsArray\":json.loads(jsonObj[0][\"result\"\
+          ])\n    }"
+        code_language: python3
+        desc: ''
+        outputs:
+          jsArray:
+            children: null
+            type: array[string]
+        selected: false
+        title: 获得贴纸json数组
+        type: code
+        variables:
+        - value_selector:
+          - '1741600118401'
+          - json
+          variable: jsonObj
+      height: 54
+      id: '1741600163288'
+      position:
+        x: 1988
+        y: 257
+      positionAbsolute:
+        x: 1988
+        y: 257
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        error_handle_mode: continue-on-error
+        height: 565
+        is_parallel: true
+        iterator_selector:
+        - '1741600163288'
+        - jsArray
+        output_selector:
+        - '1741600592312'
+        - result
+        output_type: array[string]
+        parallel_nums: 10
+        selected: false
+        start_node_id: 1741600194047start
+        title: 迭代
+        type: iteration
+        width: 1288.6828426771503
+      height: 565
+      id: '1741600194047'
+      position:
+        x: 2522.3819440704524
+        y: 243.94174155055816
+      positionAbsolute:
+        x: 2522.3819440704524
+        y: 243.94174155055816
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 1289
+      zIndex: 1
+    - data:
+        desc: ''
+        isInIteration: true
+        selected: false
+        title: ''
+        type: iteration-start
+      draggable: false
+      height: 48
+      id: 1741600194047start
+      parentId: '1741600194047'
+      position:
+        x: 24
+        y: 68
+      positionAbsolute:
+        x: 2546.3819440704524
+        y: 311.94174155055816
+      selectable: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom-iteration-start
+      width: 44
+      zIndex: 1002
+    - data:
+        code: "import secrets\ndef main() -> dict:\n    seed = secrets.randbelow(999999999999999)\n\
+          \    return {\"seed\": seed}"
+        code_language: python3
+        desc: ''
+        isInIteration: true
+        iteration_id: '1741600194047'
+        outputs:
+          seed:
+            children: null
+            type: number
+        selected: false
+        title: 获取种子
+        type: code
+        variables: []
+      height: 54
+      id: '1741600203544'
+      parentId: '1741600194047'
+      position:
+        x: 130.39331590961956
+        y: 65
+      positionAbsolute:
+        x: 2652.775259980072
+        y: 308.94174155055816
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+      zIndex: 1002
+    - data:
+        desc: ''
+        isInIteration: true
+        iteration_id: '1741600194047'
+        provider_id: b91fa2c6-9423-4da2-8153-d9a8285b86bf
+        provider_name: 提示词增强-贴纸
+        provider_type: workflow
+        selected: false
+        title: 提示词增强-贴纸
+        tool_configurations: {}
+        tool_label: 提示词增强-贴纸
+        tool_name: prompt_enhance_tie
+        tool_parameters:
+          input_prompt:
+            type: mixed
+            value: '{{#1741600194047.item#}}，{{#1741599561951.theme#}}'
+        type: tool
+      height: 54
+      id: '1741600404727'
+      parentId: '1741600194047'
+      position:
+        x: 116.68284267715035
+        y: 197.71203393112233
+      positionAbsolute:
+        x: 2639.0647867476027
+        y: 441.6537754816805
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+      zIndex: 1002
+    - data:
+        code: "import re\nimport json\ndef main(jsonObj) -> dict:\n    prompt = jsonObj[0][\"\
+          result\"]\n    return {\n        \"prompt\":prompt\n    }"
+        code_language: python3
+        desc: ''
+        isInIteration: true
+        iteration_id: '1741600194047'
+        outputs:
+          prompt:
+            children: null
+            type: string
+        selected: false
+        title: 获取提示词
+        type: code
+        variables:
+        - value_selector:
+          - '1741600404727'
+          - json
+          variable: jsonObj
+      height: 54
+      id: '1741600428895'
+      parentId: '1741600194047'
+      position:
+        x: 411.18284267715035
+        y: 203.21203393112228
+      positionAbsolute:
+        x: 2933.5647867476027
+        y: 447.15377548168044
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+      zIndex: 1002
+    - data:
+        authorization:
+          config: null
+          type: no-auth
+        body:
+          data:
+          - id: key-value-1
+            key: ''
+            type: text
+            value: "\n\n{\"prompt\":{\n  \"1\": {\n    \"inputs\": {\n      \"seed\"\
+              : {{#1741600203544.seed#}},\n      \"steps\": 20,\n      \"cfg\": 1,\n\
+              \      \"sampler_name\": \"dpmpp_2m\",\n      \"scheduler\": \"simple\"\
+              ,\n      \"denoise\": 1,\n      \"model\": [\n        \"2\",\n     \
+              \   0\n      ],\n      \"positive\": [\n        \"3\",\n        0\n\
+              \      ],\n      \"negative\": [\n        \"4\",\n        0\n      ],\n\
+              \      \"latent_image\": [\n        \"7\",\n        0\n      ]\n   \
+              \ },\n    \"class_type\": \"KSampler\",\n    \"_meta\": {\n      \"\
+              title\": \"K采样器\"\n    }\n  },\n  \"2\": {\n    \"inputs\": {\n    \
+              \  \"unet_name\": \"flux1-FP8-dev.safetensors\",\n      \"weight_dtype\"\
+              : \"fp8_e4m3fn\"\n    },\n    \"class_type\": \"UNETLoader\",\n    \"\
+              _meta\": {\n      \"title\": \"UNET加载器\"\n    }\n  },\n  \"3\": {\n\
+              \    \"inputs\": {\n      \"text\": \"{{#1741600428895.prompt#}}\",\n\
+              \      \"clip\": [\n        \"6\",\n        0\n      ]\n    },\n   \
+              \ \"class_type\": \"CLIPTextEncode\",\n    \"_meta\": {\n      \"title\"\
+              : \"CLIP文本编码器（正向提示词）\"\n    }\n  },\n  \"4\": {\n    \"inputs\": {\n\
+              \      \"text\": \"\",\n      \"clip\": [\n        \"6\",\n        0\n\
+              \      ]\n    },\n    \"class_type\": \"CLIPTextEncode\",\n    \"_meta\"\
+              : {\n      \"title\": \"CLIP文本编码器\"\n    }\n  },\n  \"6\": {\n    \"\
+              inputs\": {\n      \"clip_name1\": \"t5xxl_fp8_e4m3fn.safetensors\"\
+              ,\n      \"clip_name2\": \"clip_l.safetensors\",\n      \"type\": \"\
+              flux\",\n      \"device\": \"default\"\n    },\n    \"class_type\":\
+              \ \"DualCLIPLoader\",\n    \"_meta\": {\n      \"title\": \"双CLIP加载器\"\
+              \n    }\n  },\n  \"7\": {\n    \"inputs\": {\n      \"width\": 1024,\n\
+              \      \"height\": 1024,\n      \"batch_size\": 1\n    },\n    \"class_type\"\
+              : \"EmptyLatentImage\",\n    \"_meta\": {\n      \"title\": \"空Latent\"\
+              \n    }\n  },\n  \"8\": {\n    \"inputs\": {\n      \"samples\": [\n\
+              \        \"1\",\n        0\n      ],\n      \"vae\": [\n        \"9\"\
+              ,\n        0\n      ]\n    },\n    \"class_type\": \"VAEDecode\",\n\
+              \    \"_meta\": {\n      \"title\": \"VAE解码\"\n    }\n  },\n  \"9\"\
+              : {\n    \"inputs\": {\n      \"vae_name\": \"FLUX.1-vae.sft\"\n   \
+              \ },\n    \"class_type\": \"VAELoader\",\n    \"_meta\": {\n      \"\
+              title\": \"VAE加载器\"\n    }\n  },\n  \"10\": {\n    \"inputs\": {\n \
+              \     \"filename_prefix\": \"ComfyUI\",\n      \"images\": [\n     \
+              \   \"8\",\n        0\n      ]\n    },\n    \"class_type\": \"SaveImage\"\
+              ,\n    \"_meta\": {\n      \"title\": \"保存图像\"\n    }\n  }\n}\n}"
+          type: json
+        desc: ''
+        headers: ontent-Type:application/json
+        isInIteration: true
+        iteration_id: '1741600194047'
+        method: post
+        params: ''
+        retry_config:
+          max_retries: 3
+          retry_enabled: false
+          retry_interval: 100
+        selected: false
+        timeout:
+          connect: 300
+          max_connect_timeout: 0
+          max_read_timeout: 0
+          max_write_timeout: 0
+        title: HTTP 请求
+        type: http-request
+        url: http://172.16.50.118:8188/prompt
+        variables: []
+      height: 110
+      id: '1741600475120'
+      parentId: '1741600194047'
+      position:
+        x: 724.6828426771503
+        y: 197.71203393112233
+      positionAbsolute:
+        x: 3247.0647867476027
+        y: 441.6537754816805
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+      zIndex: 1002
+    - data:
+        code: "\nimport json\nimport requests\nimport time\ndef main(body: str) ->\
+          \ dict:\n    data= json.loads(body)\n    prompt_id=data[\"prompt_id\"]\n\
+          \    number=data[\"number\"]\n    images=[]\n    image_urls=[]\n    while\
+          \ True:\n        time.sleep(1)\n        data = requests.get(\"http://172.16.50.118:8188/history/\"\
+          +prompt_id).json()\n        if prompt_id in data:\n            status=data[prompt_id][\"\
+          status\"]\n            if status[\"completed\"] and status[\"status_str\"\
+          ]==\"success\":\n                images=data[prompt_id][\"outputs\"][\"\
+          10\"][\"images\"]\n                break\n        else:\n            continue\n\
+          \    for img in images:\n        image_urls.append(\n            \"http://172.16.50.118:8188/view?filename=\"\
+          +img[\"filename\"]+\"&subfolder=\"+img[\"subfolder\"]+\"&type=output\"\n\
+          \        )\n    return {\n        \"result\": image_urls ,\n    }\n"
+        code_language: python3
+        desc: ''
+        isInIteration: true
+        iteration_id: '1741600194047'
+        outputs:
+          result:
+            children: null
+            type: array[string]
+        retry_config:
+          max_retries: 10
+          retry_enabled: true
+          retry_interval: 2176
+        selected: false
+        title: 等待ComfyUI出图
+        type: code
+        variables:
+        - value_selector:
+          - '1741600475120'
+          - body
+          variable: body
+      height: 80
+      id: '1741600592312'
+      parentId: '1741600194047'
+      position:
+        x: 1028.6828426771503
+        y: 197.71203393112233
+      positionAbsolute:
+        x: 3551.0647867476027
+        y: 441.6537754816805
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+      zIndex: 1002
+    - data:
+        code: "import re\ndef main(imgs_array) -> dict:\n    markdown_img_strs = \"\
+          \"\n    for url in imgs_array:\n        img = f\"![image]({url})\"\n   \
+          \     if markdown_img_strs:\n            markdown_img_strs += \"，\"\n  \
+          \      markdown_img_strs += img\n    return {\n        \"markdown_imgs\"\
+          :markdown_img_strs\n    }"
+        code_language: python3
+        desc: ''
+        outputs:
+          markdown_imgs:
+            children: null
+            type: string
+        selected: false
+        title: markdown_image
+        type: code
+        variables:
+        - value_selector:
+          - '1741600194047'
+          - output
+          variable: imgs_array
+      height: 54
+      id: '1741600672520'
+      position:
+        x: 4119.334179407801
+        y: 312.54272761986954
+      positionAbsolute:
+        x: 4119.334179407801
+        y: 312.54272761986954
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        answer: 助手正在努力生成中。。。
+        desc: ''
+        selected: true
+        title: 提示等待
+        type: answer
+        variables: []
+      height: 100
+      id: '1741601682328'
+      position:
+        x: 2561.790574799723
+        y: -12.985268227348058
+      positionAbsolute:
+        x: 2561.790574799723
+        y: -12.985268227348058
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    viewport:
+      x: -1171.78136758401
+      y: 152.87829394969364
+      zoom: 0.659753955386447

@@ -1,0 +1,530 @@
+app:
+  description: 生成房间内的荷官
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  mode: workflow
+  name: 荷官工作流（房间）
+  use_icon_as_answer_icon: false
+kind: app
+version: 0.1.5
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInIteration: false
+        sourceType: start
+        targetType: tool
+      id: 1740137243774-source-1740473952605-target
+      source: '1740137243774'
+      sourceHandle: source
+      target: '1740473952605'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: start
+        targetType: code
+      id: 1740137243774-source-1740473961485-target
+      source: '1740137243774'
+      sourceHandle: source
+      target: '1740473961485'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: tool
+        targetType: code
+      id: 1740473952605-source-1740473979757-target
+      source: '1740473952605'
+      sourceHandle: source
+      target: '1740473979757'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: code
+        targetType: http-request
+      id: 1740473979757-source-1740474019877-target
+      source: '1740473979757'
+      sourceHandle: source
+      target: '1740474019877'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: code
+        targetType: http-request
+      id: 1740473961485-source-1740474019877-target
+      source: '1740473961485'
+      sourceHandle: source
+      target: '1740474019877'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: http-request
+        targetType: code
+      id: 1740474019877-source-1740474031725-target
+      source: '1740474019877'
+      sourceHandle: source
+      target: '1740474031725'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: code
+        targetType: end
+      id: 1740474031725-source-1740137245334-target
+      source: '1740474031725'
+      sourceHandle: source
+      target: '1740137245334'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        desc: ''
+        selected: false
+        title: 开始
+        type: start
+        variables:
+        - allowed_file_extensions: []
+          allowed_file_types:
+          - image
+          allowed_file_upload_methods:
+          - local_file
+          - remote_url
+          label: 主题
+          max_length: 2048
+          options: []
+          required: true
+          type: paragraph
+          variable: theme
+      height: 90
+      id: '1740137243774'
+      position:
+        x: 30
+        y: 268
+      positionAbsolute:
+        x: 30
+        y: 268
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        outputs:
+        - value_selector:
+          - '1740474031725'
+          - result
+          variable: result
+        selected: false
+        title: 结束
+        type: end
+      height: 90
+      id: '1740137245334'
+      position:
+        x: 1550
+        y: 268
+      positionAbsolute:
+        x: 1550
+        y: 268
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        provider_id: 33192eee-1b01-4896-98bf-bc3bd245d036
+        provider_name: 提示词增强工具
+        provider_type: workflow
+        selected: false
+        title: 提示词增强工具
+        tool_configurations: {}
+        tool_label: 提示词增强工具
+        tool_name: prompt_enhance
+        tool_parameters:
+          input_prompt:
+            type: mixed
+            value: 身着低胸连衣裙的美丽女荷官，粉色短发，头饰四叶草装饰，渲染逼真，头发细节丰富，清晰可见，{{#1740137243774.theme#}}
+        type: tool
+      height: 54
+      id: '1740473952605'
+      position:
+        x: 334
+        y: 268
+      positionAbsolute:
+        x: 334
+        y: 268
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        code: "import secrets\ndef main() -> dict:\n    seed = secrets.randbelow(999999999999999)\n\
+          \    return {\"seed\": seed}"
+        code_language: python3
+        desc: ''
+        outputs:
+          seed:
+            children: null
+            type: number
+        selected: true
+        title: 获取种子
+        type: code
+        variables: []
+      height: 54
+      id: '1740473961485'
+      position:
+        x: 638
+        y: 362
+      positionAbsolute:
+        x: 638
+        y: 362
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        code: "import re\nimport json\ndef main(jsonObj) -> dict:\n    prompt = jsonObj[0][\"\
+          result\"]\n    return {\n        \"prompt\":prompt\n    }"
+        code_language: python3
+        desc: ''
+        outputs:
+          prompt:
+            children: null
+            type: string
+        selected: false
+        title: 获取提示词
+        type: code
+        variables:
+        - value_selector:
+          - '1740473952605'
+          - json
+          variable: jsonObj
+      height: 54
+      id: '1740473979757'
+      position:
+        x: 638
+        y: 268
+      positionAbsolute:
+        x: 638
+        y: 268
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        authorization:
+          config: null
+          type: no-auth
+        body:
+          data:
+          - id: key-value-1
+            key: ''
+            type: text
+            value: "{\"prompt\":{\n  \"3\": {\n    \"inputs\": {\n      \"seed\":\
+              \ {{#1740473961485.seed#}},\n      \"steps\": 20,\n      \"cfg\": 1,\n\
+              \      \"sampler_name\": \"euler_ancestral\",\n      \"scheduler\":\
+              \ \"normal\",\n      \"denoise\": 1,\n      \"model\": [\n        \"\
+              10\",\n        0\n      ],\n      \"positive\": [\n        \"15\",\n\
+              \        0\n      ],\n      \"negative\": [\n        \"15\",\n     \
+              \   1\n      ],\n      \"latent_image\": [\n        \"37\",\n      \
+              \  0\n      ]\n    },\n    \"class_type\": \"KSampler\",\n    \"_meta\"\
+              : {\n      \"title\": \"K采样器\"\n    }\n  },\n  \"6\": {\n    \"inputs\"\
+              : {\n      \"text\": \"{{#1740473979757.prompt#}}\",\n      \"clip\"\
+              : [\n        \"12\",\n        0\n      ]\n    },\n    \"class_type\"\
+              : \"CLIPTextEncode\",\n    \"_meta\": {\n      \"title\": \"CLIP文本编码器（正向提示词）\"\
+              \n    }\n  },\n  \"7\": {\n    \"inputs\": {\n      \"text\": \"\",\n\
+              \      \"clip\": [\n        \"12\",\n        0\n      ]\n    },\n  \
+              \  \"class_type\": \"CLIPTextEncode\",\n    \"_meta\": {\n      \"title\"\
+              : \"CLIP文本编码器\"\n    }\n  },\n  \"8\": {\n    \"inputs\": {\n      \"\
+              samples\": [\n        \"3\",\n        0\n      ],\n      \"vae\": [\n\
+              \        \"11\",\n        0\n      ]\n    },\n    \"class_type\": \"\
+              VAEDecode\",\n    \"_meta\": {\n      \"title\": \"VAE解码\"\n    }\n\
+              \  },\n  \"9\": {\n    \"inputs\": {\n      \"filename_prefix\": \"\
+              ComfyUI\",\n      \"images\": [\n        \"8\",\n        0\n      ]\n\
+              \    },\n    \"class_type\": \"SaveImage\",\n    \"_meta\": {\n    \
+              \  \"title\": \"保存图像\"\n    }\n  },\n  \"10\": {\n    \"inputs\": {\n\
+              \      \"unet_name\": \"flux1-FP8-dev.safetensors\",\n      \"weight_dtype\"\
+              : \"fp8_e4m3fn\"\n    },\n    \"class_type\": \"UNETLoader\",\n    \"\
+              _meta\": {\n      \"title\": \"UNET加载器\"\n    }\n  },\n  \"11\": {\n\
+              \    \"inputs\": {\n      \"vae_name\": \"FLUX.1-vae.sft\"\n    },\n\
+              \    \"class_type\": \"VAELoader\",\n    \"_meta\": {\n      \"title\"\
+              : \"VAE加载器\"\n    }\n  },\n  \"12\": {\n    \"inputs\": {\n      \"\
+              clip_name1\": \"t5xxl_fp8_e4m3fn.safetensors\",\n      \"clip_name2\"\
+              : \"clip_l.safetensors\",\n      \"type\": \"flux\",\n      \"device\"\
+              : \"default\"\n    },\n    \"class_type\": \"DualCLIPLoader\",\n   \
+              \ \"_meta\": {\n      \"title\": \"双CLIP加载器\"\n    }\n  },\n  \"13\"\
+              : {\n    \"inputs\": {\n      \"control_net_name\": \"flux\\\\FLUX.1-dev-ControlNet-Union-Pro.safetensors\"\
+              \n    },\n    \"class_type\": \"ControlNetLoader\",\n    \"_meta\":\
+              \ {\n      \"title\": \"ControlNet加载器\"\n    }\n  },\n  \"14\": {\n\
+              \    \"inputs\": {\n      \"type\": \"depth\",\n      \"control_net\"\
+              : [\n        \"13\",\n        0\n      ]\n    },\n    \"class_type\"\
+              : \"SetUnionControlNetType\",\n    \"_meta\": {\n      \"title\": \"\
+              设置UnionControlNet类型\"\n    }\n  },\n  \"15\": {\n    \"inputs\": {\n\
+              \      \"strength\": 0.6,\n      \"start_percent\": 0,\n      \"end_percent\"\
+              : 0.3,\n      \"positive\": [\n        \"6\",\n        0\n      ],\n\
+              \      \"negative\": [\n        \"7\",\n        0\n      ],\n      \"\
+              control_net\": [\n        \"14\",\n        0\n      ],\n      \"vae\"\
+              : [\n        \"11\",\n        0\n      ],\n      \"image\": [\n    \
+              \    \"17\",\n        0\n      ]\n    },\n    \"class_type\": \"ControlNetApplySD3\"\
+              ,\n    \"_meta\": {\n      \"title\": \"ControlNet应用\"\n    }\n  },\n\
+              \  \"16\": {\n    \"inputs\": {\n      \"image\": \"20250220-150714.png\"\
+              ,\n      \"upload\": \"image\"\n    },\n    \"class_type\": \"LoadImage\"\
+              ,\n    \"_meta\": {\n      \"title\": \"加载图像\"\n    }\n  },\n  \"17\"\
+              : {\n    \"inputs\": {\n      \"preprocessor\": \"DepthAnythingV2Preprocessor\"\
+              ,\n      \"resolution\": 1024,\n      \"image\": [\n        \"16\",\n\
+              \        0\n      ]\n    },\n    \"class_type\": \"AIO_Preprocessor\"\
+              ,\n    \"_meta\": {\n      \"title\": \"Aux集成预处理器\"\n    }\n  },\n \
+              \ \"18\": {\n    \"inputs\": {\n      \"images\": [\n        \"17\"\
+              ,\n        0\n      ]\n    },\n    \"class_type\": \"PreviewImage\"\
+              ,\n    \"_meta\": {\n      \"title\": \"预览图像\"\n    }\n  },\n  \"19\"\
+              : {\n    \"inputs\": {\n      \"image\": \"20250220-150714.png\",\n\
+              \      \"upload\": \"image\"\n    },\n    \"class_type\": \"LoadImage\"\
+              ,\n    \"_meta\": {\n      \"title\": \"加载图像\"\n    }\n  },\n  \"20\"\
+              : {\n    \"inputs\": {\n      \"sam_model\": \"sam_vit_h (2.56GB)\"\
+              ,\n      \"grounding_dino_model\": \"GroundingDINO_SwinT_OGC (694MB)\"\
+              ,\n      \"threshold\": 0.3,\n      \"detail_method\": \"VITMatte\"\
+              ,\n      \"detail_erode\": 6,\n      \"detail_dilate\": 6,\n      \"\
+              black_point\": 0.15,\n      \"white_point\": 0.99,\n      \"process_detail\"\
+              : true,\n      \"prompt\": \"only face\",\n      \"device\": \"cuda\"\
+              ,\n      \"max_megapixels\": 2,\n      \"cache_model\": false,\n   \
+              \   \"image\": [\n        \"22\",\n        0\n      ]\n    },\n    \"\
+              class_type\": \"LayerMask: SegmentAnythingUltra V2\",\n    \"_meta\"\
+              : {\n      \"title\": \"SegmentAnything Ultra V2\"\n    }\n  },\n  \"\
+              21\": {\n    \"inputs\": {\n      \"images\": [\n        \"20\",\n \
+              \       0\n      ]\n    },\n    \"class_type\": \"PreviewImage\",\n\
+              \    \"_meta\": {\n      \"title\": \"预览图像\"\n    }\n  },\n  \"22\"\
+              : {\n    \"inputs\": {\n      \"upscale_method\": \"nearest-exact\"\
+              ,\n      \"width\": 788,\n      \"height\": 1024,\n      \"crop\": \"\
+              disabled\",\n      \"image\": [\n        \"19\",\n        0\n      ]\n\
+              \    },\n    \"class_type\": \"ImageScale\",\n    \"_meta\": {\n   \
+              \   \"title\": \"图像缩放\"\n    }\n  },\n  \"23\": {\n    \"inputs\": {\n\
+              \      \"sam_model\": \"sam_vit_h (2.56GB)\",\n      \"grounding_dino_model\"\
+              : \"GroundingDINO_SwinT_OGC (694MB)\",\n      \"threshold\": 0.3,\n\
+              \      \"detail_method\": \"VITMatte\",\n      \"detail_erode\": 1,\n\
+              \      \"detail_dilate\": 6,\n      \"black_point\": 0.15,\n      \"\
+              white_point\": 0.99,\n      \"process_detail\": true,\n      \"prompt\"\
+              : \"girl\",\n      \"device\": \"cuda\",\n      \"max_megapixels\":\
+              \ 2,\n      \"cache_model\": false,\n      \"image\": [\n        \"\
+              22\",\n        0\n      ]\n    },\n    \"class_type\": \"LayerMask:\
+              \ SegmentAnythingUltra V2\",\n    \"_meta\": {\n      \"title\": \"\
+              SegmentAnything Ultra V2\"\n    }\n  },\n  \"24\": {\n    \"inputs\"\
+              : {\n      \"images\": [\n        \"23\",\n        0\n      ]\n    },\n\
+              \    \"class_type\": \"PreviewImage\",\n    \"_meta\": {\n      \"title\"\
+              : \"预览图像\"\n    }\n  },\n  \"26\": {\n    \"inputs\": {\n      \"mask\"\
+              : [\n        \"20\",\n        1\n      ]\n    },\n    \"class_type\"\
+              : \"MaskToImage\",\n    \"_meta\": {\n      \"title\": \"遮罩到图像\"\n \
+              \   }\n  },\n  \"27\": {\n    \"inputs\": {\n      \"images\": [\n \
+              \       \"26\",\n        0\n      ]\n    },\n    \"class_type\": \"\
+              PreviewImage\",\n    \"_meta\": {\n      \"title\": \"预览图像\"\n    }\n\
+              \  },\n  \"28\": {\n    \"inputs\": {\n      \"mask\": [\n        \"\
+              23\",\n        1\n      ]\n    },\n    \"class_type\": \"MaskToImage\"\
+              ,\n    \"_meta\": {\n      \"title\": \"遮罩到图像\"\n    }\n  },\n  \"29\"\
+              : {\n    \"inputs\": {\n      \"images\": [\n        \"28\",\n     \
+              \   0\n      ]\n    },\n    \"class_type\": \"PreviewImage\",\n    \"\
+              _meta\": {\n      \"title\": \"预览图像\"\n    }\n  },\n  \"34\": {\n  \
+              \  \"inputs\": {\n      \"mask1\": [\n        \"23\",\n        1\n \
+              \     ],\n      \"mask2\": [\n        \"20\",\n        1\n      ]\n\
+              \    },\n    \"class_type\": \"SubtractMask\",\n    \"_meta\": {\n \
+              \     \"title\": \"遮罩相减\"\n    }\n  },\n  \"35\": {\n    \"inputs\"\
+              : {\n      \"mask\": [\n        \"40\",\n        0\n      ]\n    },\n\
+              \    \"class_type\": \"MaskToImage\",\n    \"_meta\": {\n      \"title\"\
+              : \"遮罩到图像\"\n    }\n  },\n  \"36\": {\n    \"inputs\": {\n      \"images\"\
+              : [\n        \"35\",\n        0\n      ]\n    },\n    \"class_type\"\
+              : \"PreviewImage\",\n    \"_meta\": {\n      \"title\": \"预览图像\"\n \
+              \   }\n  },\n  \"37\": {\n    \"inputs\": {\n      \"samples\": [\n\
+              \        \"38\",\n        0\n      ],\n      \"mask\": [\n        \"\
+              40\",\n        0\n      ]\n    },\n    \"class_type\": \"SetLatentNoiseMask\"\
+              ,\n    \"_meta\": {\n      \"title\": \"设置Latent噪波遮罩\"\n    }\n  },\n\
+              \  \"38\": {\n    \"inputs\": {\n      \"pixels\": [\n        \"22\"\
+              ,\n        0\n      ],\n      \"vae\": [\n        \"11\",\n        0\n\
+              \      ]\n    },\n    \"class_type\": \"VAEEncode\",\n    \"_meta\"\
+              : {\n      \"title\": \"VAE编码\"\n    }\n  },\n  \"39\": {\n    \"inputs\"\
+              : {\n      \"dilation\": 10,\n      \"mask\": [\n        \"50\",\n \
+              \       0\n      ]\n    },\n    \"class_type\": \"ImpactDilateMask\"\
+              ,\n    \"_meta\": {\n      \"title\": \"遮罩膨胀\"\n    }\n  },\n  \"40\"\
+              : {\n    \"inputs\": {\n      \"kernel_size\": 20,\n      \"sigma\"\
+              : 10,\n      \"mask\": [\n        \"39\",\n        0\n      ]\n    },\n\
+              \    \"class_type\": \"ImpactGaussianBlurMask\",\n    \"_meta\": {\n\
+              \      \"title\": \"遮罩高斯模糊\"\n    }\n  },\n  \"41\": {\n    \"inputs\"\
+              : {\n      \"sam_model\": \"sam_vit_h (2.56GB)\",\n      \"grounding_dino_model\"\
+              : \"GroundingDINO_SwinT_OGC (694MB)\",\n      \"threshold\": 0.3,\n\
+              \      \"detail_method\": \"VITMatte\",\n      \"detail_erode\": 1,\n\
+              \      \"detail_dilate\": 6,\n      \"black_point\": 0.15,\n      \"\
+              white_point\": 0.99,\n      \"process_detail\": true,\n      \"prompt\"\
+              : \"two palm\",\n      \"device\": \"cuda\",\n      \"max_megapixels\"\
+              : 2,\n      \"cache_model\": false,\n      \"image\": [\n        \"\
+              22\",\n        0\n      ]\n    },\n    \"class_type\": \"LayerMask:\
+              \ SegmentAnythingUltra V2\",\n    \"_meta\": {\n      \"title\": \"\
+              SegmentAnything Ultra V2\"\n    }\n  },\n  \"42\": {\n    \"inputs\"\
+              : {\n      \"mask\": [\n        \"41\",\n        1\n      ]\n    },\n\
+              \    \"class_type\": \"MaskToImage\",\n    \"_meta\": {\n      \"title\"\
+              : \"遮罩到图像\"\n    }\n  },\n  \"43\": {\n    \"inputs\": {\n      \"images\"\
+              : [\n        \"41\",\n        0\n      ]\n    },\n    \"class_type\"\
+              : \"PreviewImage\",\n    \"_meta\": {\n      \"title\": \"预览图像\"\n \
+              \   }\n  },\n  \"44\": {\n    \"inputs\": {\n      \"images\": [\n \
+              \       \"42\",\n        0\n      ]\n    },\n    \"class_type\": \"\
+              PreviewImage\",\n    \"_meta\": {\n      \"title\": \"预览图像\"\n    }\n\
+              \  },\n  \"45\": {\n    \"inputs\": {\n      \"mask1\": [\n        \"\
+              34\",\n        0\n      ],\n      \"mask2\": [\n        \"41\",\n  \
+              \      1\n      ]\n    },\n    \"class_type\": \"SubtractMask\",\n \
+              \   \"_meta\": {\n      \"title\": \"遮罩相减\"\n    }\n  },\n  \"46\":\
+              \ {\n    \"inputs\": {\n      \"sam_model\": \"sam_vit_h (2.56GB)\"\
+              ,\n      \"grounding_dino_model\": \"GroundingDINO_SwinT_OGC (694MB)\"\
+              ,\n      \"threshold\": 0.3,\n      \"detail_method\": \"VITMatte\"\
+              ,\n      \"detail_erode\": 1,\n      \"detail_dilate\": 6,\n      \"\
+              black_point\": 0.15,\n      \"white_point\": 0.99,\n      \"process_detail\"\
+              : true,\n      \"prompt\": \"play cards\",\n      \"device\": \"cuda\"\
+              ,\n      \"max_megapixels\": 2,\n      \"cache_model\": false,\n   \
+              \   \"image\": [\n        \"22\",\n        0\n      ]\n    },\n    \"\
+              class_type\": \"LayerMask: SegmentAnythingUltra V2\",\n    \"_meta\"\
+              : {\n      \"title\": \"SegmentAnything Ultra V2\"\n    }\n  },\n  \"\
+              47\": {\n    \"inputs\": {\n      \"mask\": [\n        \"46\",\n   \
+              \     1\n      ]\n    },\n    \"class_type\": \"MaskToImage\",\n   \
+              \ \"_meta\": {\n      \"title\": \"遮罩到图像\"\n    }\n  },\n  \"48\": {\n\
+              \    \"inputs\": {\n      \"images\": [\n        \"46\",\n        0\n\
+              \      ]\n    },\n    \"class_type\": \"PreviewImage\",\n    \"_meta\"\
+              : {\n      \"title\": \"预览图像\"\n    }\n  },\n  \"49\": {\n    \"inputs\"\
+              : {\n      \"images\": [\n        \"47\",\n        0\n      ]\n    },\n\
+              \    \"class_type\": \"PreviewImage\",\n    \"_meta\": {\n      \"title\"\
+              : \"预览图像\"\n    }\n  },\n  \"50\": {\n    \"inputs\": {\n      \"mask1\"\
+              : [\n        \"45\",\n        0\n      ],\n      \"mask2\": [\n    \
+              \    \"46\",\n        1\n      ]\n    },\n    \"class_type\": \"SubtractMask\"\
+              ,\n    \"_meta\": {\n      \"title\": \"遮罩相减\"\n    }\n  }\n}\n}"
+          type: json
+        desc: ''
+        headers: Content-Type:application/json
+        method: post
+        params: ''
+        retry_config:
+          max_retries: 3
+          retry_enabled: true
+          retry_interval: 100
+        selected: false
+        timeout:
+          max_connect_timeout: 0
+          max_read_timeout: 0
+          max_write_timeout: 0
+        title: HTTP 请求
+        type: http-request
+        url: http://172.16.50.118:8188/prompt
+        variables: []
+      height: 136
+      id: '1740474019877'
+      position:
+        x: 942
+        y: 268
+      positionAbsolute:
+        x: 942
+        y: 268
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        code: "\nimport json\nimport requests\nimport time\ndef main(body: str) ->\
+          \ dict:\n    data= json.loads(body)\n    prompt_id=data[\"prompt_id\"]\n\
+          \    number=data[\"number\"]\n    images=[]\n    image_urls=[]\n    while\
+          \ True:\n        time.sleep(3)\n        data = requests.get(\"http://172.16.50.118:8188/history/\"\
+          +prompt_id).json()\n        if prompt_id in data:\n            status=data[prompt_id][\"\
+          status\"]\n            if status[\"completed\"] and status[\"status_str\"\
+          ]==\"success\":\n                images=data[prompt_id][\"outputs\"][\"\
+          9\"][\"images\"]\n                break\n        else:\n            continue\n\
+          \    for img in images:\n        image_urls.append(\n            \"http://172.16.50.118:8188/view?filename=\"\
+          +img[\"filename\"]+\"&subfolder=\"+img[\"subfolder\"]+\"&type=output\"\n\
+          \        )\n    return {\n        \"result\": image_urls ,\n    }\n"
+        code_language: python3
+        desc: ''
+        outputs:
+          result:
+            children: null
+            type: array[string]
+        retry_config:
+          max_retries: 10
+          retry_enabled: true
+          retry_interval: 2078
+        selected: false
+        title: 等待ComfyUI出图
+        type: code
+        variables:
+        - value_selector:
+          - '1740474019877'
+          - body
+          variable: body
+      height: 80
+      id: '1740474031725'
+      position:
+        x: 1246
+        y: 268
+      positionAbsolute:
+        x: 1246
+        y: 268
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    viewport:
+      x: -859.5714285714287
+      y: -358
+      zoom: 2

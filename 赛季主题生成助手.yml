@@ -1,0 +1,176 @@
+app:
+  description: 输入主题，然后生成一套游戏内使用各种资源，比如头像框，贴纸，荷官等
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  mode: agent-chat
+  name: 赛季主题生成助手
+  use_icon_as_answer_icon: false
+kind: app
+model_config:
+  agent_mode:
+    enabled: true
+    max_iteration: 10
+    prompt: null
+    strategy: function_call
+    tools:
+    - enabled: true
+      isDeleted: false
+      notAuthor: false
+      provider_id: 9c4f37cb-11a1-4250-ad0f-d094f318cbbb
+      provider_name: ' 房间背景工作流'
+      provider_type: workflow
+      tool_label: ' 房间背景工作流'
+      tool_name: flux_wf_room_bg
+      tool_parameters:
+        theme: ''
+    - enabled: true
+      isDeleted: false
+      notAuthor: false
+      provider_id: aec3076e-5cca-4c5c-b64d-5e0cf52337e0
+      provider_name: 房间桌子工作流
+      provider_type: workflow
+      tool_label: 房间桌子工作流
+      tool_name: flux_wf_room_desk
+      tool_parameters:
+        theme: ''
+    - enabled: true
+      isDeleted: false
+      notAuthor: false
+      provider_id: 24ef1d9e-64a3-4818-960c-70d08e47cd5d
+      provider_name: 荷官工作流（大厅）
+      provider_type: workflow
+      tool_label: 荷官工作流（大厅）
+      tool_name: flux_wf_lobby_girl
+      tool_parameters:
+        theme: ''
+    - enabled: true
+      isDeleted: false
+      notAuthor: false
+      provider_id: cd0235f4-3009-44aa-98c2-18a7a70d0ec0
+      provider_name: 荷官工作流（房间）
+      provider_type: workflow
+      tool_label: 荷官工作流（房间）
+      tool_name: flux_wf_room_girl
+      tool_parameters:
+        theme: ''
+    - enabled: true
+      isDeleted: false
+      notAuthor: false
+      provider_id: 80d00888-984b-4d31-9ba8-a5a56591efb2
+      provider_name: 头像框工作流
+      provider_type: workflow
+      tool_label: 头像框工作流
+      tool_name: flux_wf_head_frame
+      tool_parameters:
+        theme: ''
+    - enabled: true
+      isDeleted: false
+      notAuthor: false
+      provider_id: 2a99b2c5-c42c-4f80-86d0-b5be01009e62
+      provider_name: 贴纸工作流
+      provider_type: workflow
+      tool_label: 贴纸工作流
+      tool_name: flux_wf_game_goods
+      tool_parameters:
+        theme: ''
+  annotation_reply:
+    enabled: false
+  chat_prompt_config: {}
+  completion_prompt_config: {}
+  dataset_configs:
+    datasets:
+      datasets: []
+    reranking_enable: false
+    retrieval_model: multiple
+    top_k: 4
+  dataset_query_variable: ''
+  external_data_tools: []
+  file_upload:
+    allowed_file_extensions:
+    - .JPG
+    - .JPEG
+    - .PNG
+    - .GIF
+    - .WEBP
+    - .SVG
+    - .MP4
+    - .MOV
+    - .MPEG
+    - .MPGA
+    allowed_file_types: []
+    allowed_file_upload_methods:
+    - remote_url
+    - local_file
+    enabled: false
+    image:
+      detail: high
+      enabled: false
+      number_limits: 3
+      transfer_methods:
+      - remote_url
+      - local_file
+    number_limits: 3
+  model:
+    completion_params:
+      stop: []
+    mode: chat
+    name: deepseek-chat
+    provider: deepseek
+  more_like_this:
+    enabled: false
+  opening_statement: 你好，我是生成赛季主题一系列资源图片的Agent，请这次你想生成什么主题的资源呢？
+  pre_prompt: '角色：
+
+    帮助美术人员生成赛季主题图片的助手
+
+
+    工作环境：
+
+    dify的agnent中运行。
+
+
+    功能：
+
+    根据用户输入的赛季主题，生成对应的资源图片
+
+
+    约束：
+
+    全程用中文交流。
+
+
+    工作要求：
+
+    1.每个工具都必须要成功的要调用一次，如果失败则重试。
+
+    2.把用户输入的主题原封不动的输入每个工具并调用。
+
+    3.每个工具都会返回包含图片链接的数据，把图片链接提取并存储起来，等所有工具都调用完成之后，统一把图片显示出来（用markdown格式）。
+
+    4.总共有六个工具，分别是：flux_wf_room_bg，flux_wf_room_desk，flux_wf_lobby_gir，flux_wf_room_girl，flux_wf_game_goods和flux_wf_head_frame。所有这6个工具都要调用一次。
+
+    5.最后必须要把所有存储起来的图片用markdown的格式显示出来。
+
+
+
+
+
+    '
+  prompt_type: simple
+  retriever_resource:
+    enabled: true
+  sensitive_word_avoidance:
+    configs: []
+    enabled: false
+    type: ''
+  speech_to_text:
+    enabled: false
+  suggested_questions: []
+  suggested_questions_after_answer:
+    enabled: false
+  text_to_speech:
+    enabled: false
+    language: ''
+    voice: ''
+  user_input_form: []
+version: 0.1.5

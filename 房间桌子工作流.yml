@@ -1,0 +1,434 @@
+app:
+  description: 生成房间内的桌子
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  mode: workflow
+  name: 房间桌子工作流
+  use_icon_as_answer_icon: false
+kind: app
+version: 0.1.5
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInIteration: false
+        sourceType: start
+        targetType: tool
+      id: 1740137528368-source-1740466170405-target
+      source: '1740137528368'
+      sourceHandle: source
+      target: '1740466170405'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: tool
+        targetType: code
+      id: 1740466170405-source-1740466181357-target
+      source: '1740466170405'
+      sourceHandle: source
+      target: '1740466181357'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: start
+        targetType: code
+      id: 1740137528368-source-1740466193453-target
+      source: '1740137528368'
+      sourceHandle: source
+      target: '1740466193453'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: code
+        targetType: http-request
+      id: 1740466193453-source-1740466071173-target
+      source: '1740466193453'
+      sourceHandle: source
+      target: '1740466071173'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: code
+        targetType: http-request
+      id: 1740466181357-source-1740466071173-target
+      source: '1740466181357'
+      sourceHandle: source
+      target: '1740466071173'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: http-request
+        targetType: code
+      id: 1740466071173-source-1740466301285-target
+      source: '1740466071173'
+      sourceHandle: source
+      target: '1740466301285'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: code
+        targetType: end
+      id: 1740466301285-source-1740137530126-target
+      source: '1740466301285'
+      sourceHandle: source
+      target: '1740137530126'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        desc: ''
+        selected: false
+        title: 开始
+        type: start
+        variables:
+        - label: 主题
+          max_length: 2048
+          options: []
+          required: true
+          type: paragraph
+          variable: theme
+      height: 89
+      id: '1740137528368'
+      position:
+        x: 30
+        y: 268
+      positionAbsolute:
+        x: 30
+        y: 268
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 243
+    - data:
+        desc: ''
+        outputs:
+        - value_selector:
+          - '1740466301285'
+          - result
+          variable: result
+        selected: false
+        title: 结束
+        type: end
+      height: 89
+      id: '1740137530126'
+      position:
+        x: 1550
+        y: 268
+      positionAbsolute:
+        x: 1550
+        y: 268
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 243
+    - data:
+        authorization:
+          config: null
+          type: no-auth
+        body:
+          data:
+          - id: key-value-1
+            key: ''
+            type: text
+            value: "{\"prompt\":{\n  \"1\": {\n    \"inputs\": {\n      \"seed\":\
+              \ 509788766042274,\n      \"steps\": 20,\n      \"cfg\": 1,\n      \"\
+              sampler_name\": \"euler_ancestral\",\n      \"scheduler\": \"normal\"\
+              ,\n      \"denoise\": 1,\n      \"model\": [\n        \"2\",\n     \
+              \   0\n      ],\n      \"positive\": [\n        \"18\",\n        0\n\
+              \      ],\n      \"negative\": [\n        \"18\",\n        1\n     \
+              \ ],\n      \"latent_image\": [\n        \"41\",\n        0\n      ]\n\
+              \    },\n    \"class_type\": \"KSampler\",\n    \"_meta\": {\n     \
+              \ \"title\": \"K采样器\"\n    }\n  },\n  \"2\": {\n    \"inputs\": {\n\
+              \      \"unet_name\": \"flux1-FP8-dev.safetensors\",\n      \"weight_dtype\"\
+              : \"fp8_e4m3fn\"\n    },\n    \"class_type\": \"UNETLoader\",\n    \"\
+              _meta\": {\n      \"title\": \"UNET加载器\"\n    }\n  },\n  \"3\": {\n\
+              \    \"inputs\": {\n      \"text\": \"A Texas Hold'em poker table. The\
+              \ edge of the table is made of silver-white metal, the tablecloth is\
+              \ green suede, and there is a narrow piece of wood between the tablecloth\
+              \ and the edge.\",\n      \"clip\": [\n        \"4\",\n        0\n \
+              \     ]\n    },\n    \"class_type\": \"CLIPTextEncode\",\n    \"_meta\"\
+              : {\n      \"title\": \"正向提示词\"\n    }\n  },\n  \"4\": {\n    \"inputs\"\
+              : {\n      \"clip_name1\": \"t5xxl_fp8_e4m3fn.safetensors\",\n     \
+              \ \"clip_name2\": \"clip_l.safetensors\",\n      \"type\": \"flux\"\
+              ,\n      \"device\": \"default\"\n    },\n    \"class_type\": \"DualCLIPLoader\"\
+              ,\n    \"_meta\": {\n      \"title\": \"双CLIP加载器\"\n    }\n  },\n  \"\
+              5\": {\n    \"inputs\": {\n      \"text\": \"\",\n      \"clip\": [\n\
+              \        \"4\",\n        0\n      ]\n    },\n    \"class_type\": \"\
+              CLIPTextEncode\",\n    \"_meta\": {\n      \"title\": \"CLIP文本编码器\"\n\
+              \    }\n  },\n  \"8\": {\n    \"inputs\": {\n      \"samples\": [\n\
+              \        \"1\",\n        0\n      ],\n      \"vae\": [\n        \"9\"\
+              ,\n        0\n      ]\n    },\n    \"class_type\": \"VAEDecode\",\n\
+              \    \"_meta\": {\n      \"title\": \"VAE解码\"\n    }\n  },\n  \"9\"\
+              : {\n    \"inputs\": {\n      \"vae_name\": \"FLUX.1-vae.sft\"\n   \
+              \ },\n    \"class_type\": \"VAELoader\",\n    \"_meta\": {\n      \"\
+              title\": \"VAE加载器\"\n    }\n  },\n  \"17\": {\n    \"inputs\": {\n \
+              \     \"control_net_name\": \"flux\\\\FLUX.1-dev-ControlNet-Union-Pro.safetensors\"\
+              \n    },\n    \"class_type\": \"ControlNetLoader\",\n    \"_meta\":\
+              \ {\n      \"title\": \"ControlNet加载器\"\n    }\n  },\n  \"18\": {\n\
+              \    \"inputs\": {\n      \"strength\": 0.5,\n      \"start_percent\"\
+              : 0,\n      \"end_percent\": 0.5,\n      \"positive\": [\n        \"\
+              3\",\n        0\n      ],\n      \"negative\": [\n        \"5\",\n \
+              \       0\n      ],\n      \"control_net\": [\n        \"51\",\n   \
+              \     0\n      ],\n      \"vae\": [\n        \"9\",\n        0\n   \
+              \   ],\n      \"image\": [\n        \"52\",\n        0\n      ]\n  \
+              \  },\n    \"class_type\": \"ControlNetApplySD3\",\n    \"_meta\": {\n\
+              \      \"title\": \"ControlNet应用\"\n    }\n  },\n  \"22\": {\n    \"\
+              inputs\": {\n      \"image\": \"牌桌源.png\",\n      \"upload\": \"image\"\
+              \n    },\n    \"class_type\": \"LoadImage\",\n    \"_meta\": {\n   \
+              \   \"title\": \"加载图像\"\n    }\n  },\n  \"41\": {\n    \"inputs\": {\n\
+              \      \"width\": [\n        \"42\",\n        0\n      ],\n      \"\
+              height\": [\n        \"42\",\n        1\n      ],\n      \"batch_size\"\
+              : 2\n    },\n    \"class_type\": \"EmptyLatentImage\",\n    \"_meta\"\
+              : {\n      \"title\": \"空Latent\"\n    }\n  },\n  \"42\": {\n    \"\
+              inputs\": {\n      \"image\": [\n        \"63\",\n        0\n      ]\n\
+              \    },\n    \"class_type\": \"GetImageSize+\",\n    \"_meta\": {\n\
+              \      \"title\": \"获取图像尺寸\"\n    }\n  },\n  \"51\": {\n    \"inputs\"\
+              : {\n      \"type\": \"tile\",\n      \"control_net\": [\n        \"\
+              17\",\n        0\n      ]\n    },\n    \"class_type\": \"SetUnionControlNetType\"\
+              ,\n    \"_meta\": {\n      \"title\": \"设置UnionControlNet类型\"\n    }\n\
+              \  },\n  \"52\": {\n    \"inputs\": {\n      \"preprocessor\": \"TTPlanet_TileSimple_Preprocessor\"\
+              ,\n      \"resolution\": 1024,\n      \"image\": [\n        \"63\",\n\
+              \        0\n      ]\n    },\n    \"class_type\": \"AIO_Preprocessor\"\
+              ,\n    \"_meta\": {\n      \"title\": \"Aux集成预处理器\"\n    }\n  },\n \
+              \ \"53\": {\n    \"inputs\": {\n      \"images\": [\n        \"52\"\
+              ,\n        0\n      ]\n    },\n    \"class_type\": \"PreviewImage\"\
+              ,\n    \"_meta\": {\n      \"title\": \"预览图像\"\n    }\n  },\n  \"54\"\
+              : {\n    \"inputs\": {\n      \"filename_prefix\": \"ComfyUI\",\n  \
+              \    \"images\": [\n        \"8\",\n        0\n      ]\n    },\n   \
+              \ \"class_type\": \"SaveImage\",\n    \"_meta\": {\n      \"title\"\
+              : \"保存图像\"\n    }\n  },\n  \"60\": {\n    \"inputs\": {\n      \"value\"\
+              : [\n        \"22\",\n        0\n      ]\n    },\n    \"class_type\"\
+              : \"ImpactImageInfo\",\n    \"_meta\": {\n      \"title\": \"图像信息\"\n\
+              \    }\n  },\n  \"61\": {\n    \"inputs\": {\n      \"input\": [\n \
+              \       \"60\",\n        1\n      ],\n      \"output\": \"\"\n    },\n\
+              \    \"class_type\": \"Display Int (rgthree)\",\n    \"_meta\": {\n\
+              \      \"title\": \"显示整数\"\n    }\n  },\n  \"62\": {\n    \"inputs\"\
+              : {\n      \"input\": [\n        \"60\",\n        2\n      ],\n    \
+              \  \"output\": \"\"\n    },\n    \"class_type\": \"Display Int (rgthree)\"\
+              ,\n    \"_meta\": {\n      \"title\": \"显示整数\"\n    }\n  },\n  \"63\"\
+              : {\n    \"inputs\": {\n      \"upscale_method\": \"bilinear\",\n  \
+              \    \"scale_by\": 0.8,\n      \"image\": [\n        \"22\",\n     \
+              \   0\n      ]\n    },\n    \"class_type\": \"ImageScaleBy\",\n    \"\
+              _meta\": {\n      \"title\": \"图像按系数缩放\"\n    }\n  }\n}\n}"
+          type: json
+        desc: ''
+        headers: Content-Type:application/json
+        method: post
+        params: ''
+        retry_config:
+          max_retries: 3
+          retry_enabled: true
+          retry_interval: 100
+        selected: false
+        timeout:
+          max_connect_timeout: 0
+          max_read_timeout: 0
+          max_write_timeout: 0
+        title: HTTP 请求
+        type: http-request
+        url: http://172.16.50.118:8188/prompt
+        variables: []
+      height: 134
+      id: '1740466071173'
+      position:
+        x: 942
+        y: 268
+      positionAbsolute:
+        x: 942
+        y: 268
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 243
+    - data:
+        desc: ''
+        provider_id: 33192eee-1b01-4896-98bf-bc3bd245d036
+        provider_name: 提示词增强工具
+        provider_type: workflow
+        selected: false
+        title: 提示词增强工具
+        tool_configurations: {}
+        tool_label: 提示词增强工具
+        tool_name: prompt_enhance
+        tool_parameters:
+          input_prompt:
+            type: mixed
+            value: 一张德州扑克牌桌。桌子边缘是银白色的金属，桌布是绿色的麂皮，桌布和边缘之间有一块窄窄的木板。{{#1740137528368.theme#}}
+        type: tool
+      height: 53
+      id: '1740466170405'
+      position:
+        x: 334
+        y: 362
+      positionAbsolute:
+        x: 334
+        y: 362
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 243
+    - data:
+        code: "import re\nimport json\ndef main(jsonObj) -> dict:\n    prompt = jsonObj[0][\"\
+          result\"]\n    return {\n        \"prompt\":prompt\n    }"
+        code_language: python3
+        desc: ''
+        outputs:
+          prompt:
+            children: null
+            type: string
+        selected: true
+        title: 获取提示词
+        type: code
+        variables:
+        - value_selector:
+          - '1740466170405'
+          - json
+          variable: jsonObj
+      height: 53
+      id: '1740466181357'
+      position:
+        x: 638
+        y: 362
+      positionAbsolute:
+        x: 638
+        y: 362
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 243
+    - data:
+        code: "import secrets\ndef main() -> dict:\n    seed = secrets.randbelow(999999999999999)\n\
+          \    return {\"seed\": seed}"
+        code_language: python3
+        desc: ''
+        outputs:
+          seed:
+            children: null
+            type: number
+        selected: false
+        title: 获取种子
+        type: code
+        variables: []
+      height: 53
+      id: '1740466193453'
+      position:
+        x: 638
+        y: 268
+      positionAbsolute:
+        x: 638
+        y: 268
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 243
+    - data:
+        code: "\nimport json\nimport requests\nimport time\ndef main(body: str) ->\
+          \ dict:\n    data= json.loads(body)\n    prompt_id=data[\"prompt_id\"]\n\
+          \    number=data[\"number\"]\n    images=[]\n    image_urls=[]\n    while\
+          \ True:\n        time.sleep(3)\n        data = requests.get(\"http://172.16.50.118:8188/history/\"\
+          +prompt_id).json()\n        if prompt_id in data:\n            status=data[prompt_id][\"\
+          status\"]\n            if status[\"completed\"] and status[\"status_str\"\
+          ]==\"success\":\n                images=data[prompt_id][\"outputs\"][\"\
+          54\"][\"images\"]\n                break\n        else:\n            continue\n\
+          \    for img in images:\n        image_urls.append(\n            \"http://172.16.50.118:8188/view?filename=\"\
+          +img[\"filename\"]+\"&subfolder=\"+img[\"subfolder\"]+\"&type=output\"\n\
+          \        )\n    return {\n        \"result\": image_urls ,\n    }\n"
+        code_language: python3
+        desc: ''
+        outputs:
+          result:
+            children: null
+            type: array[string]
+        retry_config:
+          max_retries: '10'
+          retry_enabled: true
+          retry_interval: 2078
+        selected: false
+        title: 等待ComfyUI出图
+        type: code
+        variables:
+        - value_selector:
+          - '1740466071173'
+          - body
+          variable: body
+      height: 78
+      id: '1740466301285'
+      position:
+        x: 1246
+        y: 268
+      positionAbsolute:
+        x: 1246
+        y: 268
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 243
+    viewport:
+      x: 29.600000000000023
+      y: 46.400000000000006
+      zoom: 0.7

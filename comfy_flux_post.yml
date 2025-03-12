@@ -1,0 +1,323 @@
+app:
+  description: ''
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  mode: workflow
+  name: comfy_flux_post
+  use_icon_as_answer_icon: false
+kind: app
+version: 0.1.5
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInIteration: false
+        sourceType: http-request
+        targetType: code
+      id: 1739178810867-source-1739179686484-target
+      selected: false
+      source: '1739178810867'
+      sourceHandle: source
+      target: '1739179686484'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: code
+        targetType: end
+      id: 1739179686484-source-1739178806323-target
+      source: '1739179686484'
+      sourceHandle: source
+      target: '1739178806323'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: start
+        targetType: code
+      id: 1739173394551-source-1739248739641-target
+      source: '1739173394551'
+      sourceHandle: source
+      target: '1739248739641'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: code
+        targetType: http-request
+      id: 1739248739641-source-1739178810867-target
+      source: '1739248739641'
+      sourceHandle: source
+      target: '1739178810867'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        desc: ''
+        selected: false
+        title: 开始
+        type: start
+        variables:
+        - label: prompt
+          max_length: 3000
+          options: []
+          required: true
+          type: paragraph
+          variable: prompt
+        - label: number
+          max_length: 256
+          options: []
+          required: true
+          type: number
+          variable: number
+      height: 116
+      id: '1739173394551'
+      position:
+        x: 30
+        y: 267
+      positionAbsolute:
+        x: 30
+        y: 267
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        outputs:
+        - value_selector:
+          - '1739179686484'
+          - result
+          variable: body
+        selected: false
+        title: 结束
+        type: end
+      height: 90
+      id: '1739178806323'
+      position:
+        x: 1242
+        y: 267
+      positionAbsolute:
+        x: 1242
+        y: 267
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        authorization:
+          config: null
+          type: no-auth
+        body:
+          data:
+          - id: key-value-4
+            key: ''
+            type: text
+            value: "{\"prompt\":{\n  \"6\": {\n    \"inputs\": {\n      \"text\":\
+              \ \"{{#1739173394551.prompt#}}\",\n      \"clip\": [\n        \"11\"\
+              ,\n        0\n      ]\n    },\n    \"class_type\": \"CLIPTextEncode\"\
+              ,\n    \"_meta\": {\n      \"title\": \"CLIP文本编码器\"\n    }\n  },\n \
+              \ \"8\": {\n    \"inputs\": {\n      \"samples\": [\n        \"13\"\
+              ,\n        0\n      ],\n      \"vae\": [\n        \"10\",\n        0\n\
+              \      ]\n    },\n    \"class_type\": \"VAEDecode\",\n    \"_meta\"\
+              : {\n      \"title\": \"VAE解码\"\n    }\n  },\n  \"9\": {\n    \"inputs\"\
+              : {\n      \"filename_prefix\": \"ComfyUI\",\n      \"images\": [\n\
+              \        \"8\",\n        0\n      ]\n    },\n    \"class_type\": \"\
+              SaveImage\",\n    \"_meta\": {\n      \"title\": \"保存图像\"\n    }\n \
+              \ },\n  \"10\": {\n    \"inputs\": {\n      \"vae_name\": \"FLUX.1-vae.sft\"\
+              \n    },\n    \"class_type\": \"VAELoader\",\n    \"_meta\": {\n   \
+              \   \"title\": \"VAE加载器\"\n    }\n  },\n  \"11\": {\n    \"inputs\"\
+              : {\n      \"clip_name1\": \"t5xxl_fp16.safetensors\",\n      \"clip_name2\"\
+              : \"clip_l.safetensors\",\n      \"type\": \"flux\",\n      \"device\"\
+              : \"default\"\n    },\n    \"class_type\": \"DualCLIPLoader\",\n   \
+              \ \"_meta\": {\n      \"title\": \"双CLIP加载器\"\n    }\n  },\n  \"12\"\
+              : {\n    \"inputs\": {\n      \"unet_name\": \"flux1-FP8-dev.safetensors\"\
+              ,\n      \"weight_dtype\": \"fp8_e4m3fn\"\n    },\n    \"class_type\"\
+              : \"UNETLoader\",\n    \"_meta\": {\n      \"title\": \"UNET加载器\"\n\
+              \    }\n  },\n  \"13\": {\n    \"inputs\": {\n      \"noise\": [\n \
+              \       \"25\",\n        0\n      ],\n      \"guider\": [\n        \"\
+              22\",\n        0\n      ],\n      \"sampler\": [\n        \"16\",\n\
+              \        0\n      ],\n      \"sigmas\": [\n        \"17\",\n       \
+              \ 0\n      ],\n      \"latent_image\": [\n        \"27\",\n        0\n\
+              \      ]\n    },\n    \"class_type\": \"SamplerCustomAdvanced\",\n \
+              \   \"_meta\": {\n      \"title\": \"自定义采样器(高级)\"\n    }\n  },\n  \"\
+              16\": {\n    \"inputs\": {\n      \"sampler_name\": \"dpmpp_2m\"\n \
+              \   },\n    \"class_type\": \"KSamplerSelect\",\n    \"_meta\": {\n\
+              \      \"title\": \"K采样器选择\"\n    }\n  },\n  \"17\": {\n    \"inputs\"\
+              : {\n      \"scheduler\": \"sgm_uniform\",\n      \"steps\": 20,\n \
+              \     \"denoise\": 1,\n      \"model\": [\n        \"30\",\n       \
+              \ 0\n      ]\n    },\n    \"class_type\": \"BasicScheduler\",\n    \"\
+              _meta\": {\n      \"title\": \"基础调度器\"\n    }\n  },\n  \"22\": {\n \
+              \   \"inputs\": {\n      \"model\": [\n        \"30\",\n        0\n\
+              \      ],\n      \"conditioning\": [\n        \"26\",\n        0\n \
+              \     ]\n    },\n    \"class_type\": \"BasicGuider\",\n    \"_meta\"\
+              : {\n      \"title\": \"基础引导\"\n    }\n  },\n  \"25\": {\n    \"inputs\"\
+              : {\n      \"noise_seed\": {{#1739248739641.seed#}}\n    },\n    \"\
+              class_type\": \"RandomNoise\",\n    \"_meta\": {\n      \"title\": \"\
+              随机噪波\"\n    }\n  },\n  \"26\": {\n    \"inputs\": {\n      \"guidance\"\
+              : 3,\n      \"conditioning\": [\n        \"6\",\n        0\n      ]\n\
+              \    },\n    \"class_type\": \"FluxGuidance\",\n    \"_meta\": {\n \
+              \     \"title\": \"Flux引导\"\n    }\n  },\n  \"27\": {\n    \"inputs\"\
+              : {\n      \"width\": 1024,\n      \"height\": 1024,\n      \"batch_size\"\
+              : {{#1739173394551.number#}}\n    },\n    \"class_type\": \"EmptySD3LatentImage\"\
+              ,\n    \"_meta\": {\n      \"title\": \"空Latent_SD3\"\n    }\n  },\n\
+              \  \"30\": {\n    \"inputs\": {\n      \"max_shift\": 1.2,\n      \"\
+              base_shift\": 0.5,\n      \"width\": 1024,\n      \"height\": 1024,\n\
+              \      \"model\": [\n        \"12\",\n        0\n      ]\n    },\n \
+              \   \"class_type\": \"ModelSamplingFlux\",\n    \"_meta\": {\n     \
+              \ \"title\": \"模型采样算法Flux\"\n    }\n  }\n}\n}"
+          type: json
+        desc: ''
+        headers: Content-Type:application/json
+        method: post
+        params: ''
+        retry_config:
+          max_retries: 3
+          retry_enabled: true
+          retry_interval: 100
+        selected: false
+        timeout:
+          max_connect_timeout: 0
+          max_read_timeout: 0
+          max_write_timeout: 0
+        title: HTTP 请求
+        type: http-request
+        url: http://172.16.50.118:8188/prompt
+        variables: []
+      height: 136
+      id: '1739178810867'
+      position:
+        x: 635.2857142857142
+        y: 267
+      positionAbsolute:
+        x: 635.2857142857142
+        y: 267
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        code: "\nimport json\nimport requests\nimport time\ndef main(body: str) ->\
+          \ dict:\n    data= json.loads(body)\n    prompt_id=data[\"prompt_id\"]\n\
+          \    number=data[\"number\"]\n    images=[]\n    image_urls=[]\n    while\
+          \ True:\n        time.sleep(3)\n        data = requests.get(\"http://172.16.50.118:8188/history/\"\
+          +prompt_id).json()\n        if prompt_id in data:\n            status=data[prompt_id][\"\
+          status\"]\n            if status[\"completed\"] and status[\"status_str\"\
+          ]==\"success\":\n                images=data[prompt_id][\"outputs\"][\"\
+          9\"][\"images\"]\n                break\n        else:\n            continue\n\
+          \    for img in images:\n        image_urls.append(\n            \"http://172.16.50.118:8188/view?filename=\"\
+          +img[\"filename\"]+\"&subfolder=\"+img[\"subfolder\"]+\"&type=output\"\n\
+          \        )\n    return {\n        \"result\": image_urls ,\n    }\n"
+        code_language: python3
+        desc: ''
+        outputs:
+          result:
+            children: null
+            type: array[string]
+        retry_config:
+          max_retries: '6'
+          retry_enabled: true
+          retry_interval: 1000
+        selected: false
+        title: 代码执行
+        type: code
+        variables:
+        - value_selector:
+          - '1739178810867'
+          - body
+          variable: body
+      height: 80
+      id: '1739179686484'
+      position:
+        x: 939
+        y: 267
+      positionAbsolute:
+        x: 939
+        y: 267
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        code: "import secrets\n\ndef main() -> dict:\n    seed = secrets.randbelow(999999999999999)\n\
+          \    return {\"seed\": seed}"
+        code_language: python3
+        desc: ''
+        outputs:
+          seed:
+            children: null
+            type: number
+        selected: true
+        title: 代码执行 2
+        type: code
+        variables: []
+      height: 54
+      id: '1739248739641'
+      position:
+        x: 332.2857142857143
+        y: 267
+      positionAbsolute:
+        x: 332.2857142857143
+        y: 267
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    viewport:
+      x: 205.099999999999
+      y: -43.100000000000136
+      zoom: 1.4000000000000004

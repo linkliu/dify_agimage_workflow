@@ -1,0 +1,925 @@
+app:
+  description: '赛季主题对话助手 '
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  mode: advanced-chat
+  name: '赛季主题对话助手 '
+  use_icon_as_answer_icon: false
+kind: app
+version: 0.1.5
+workflow:
+  conversation_variables:
+  - description: ' 当前任务'
+    id: 8c7d73fe-4c1c-4162-8e46-6494bdfe3122
+    name: current_task
+    selector:
+    - conversation
+    - current_task
+    value: 1
+    value_type: number
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions: []
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - remote_url
+      - local_file
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 1
+    opening_statement: '你好，我是帮您生成赛季主题资源的助手。请问接下来你想让我执行什么操作呢？
+
+      1.生成房间的背景图片
+
+      2.生成房间中桌子的图片
+
+      3.生成大厅中荷官的图片
+
+      4.生成房间中荷官的图片
+
+      5.生成头像框图片
+
+      6.生成游戏中使用的贴纸'
+    retriever_resource:
+      enabled: false
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions:
+    - '1'
+    - '2'
+    - '3'
+    - '4'
+    - '5'
+    - '6'
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInIteration: false
+        sourceType: if-else
+        targetType: answer
+      id: 1740993293860-true-1740993417234-target
+      source: '1740993293860'
+      sourceHandle: 'true'
+      target: '1740993417234'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: if-else
+        targetType: answer
+      id: 1740993293860-74f5b80e-4804-4077-835f-bf7f88d0b0ec-1740993433539-target
+      source: '1740993293860'
+      sourceHandle: 74f5b80e-4804-4077-835f-bf7f88d0b0ec
+      target: '1740993433539'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: if-else
+        targetType: answer
+      id: 1740993293860-2136669d-7034-4342-9a9c-ccb2d6255933-1740993596731-target
+      source: '1740993293860'
+      sourceHandle: 2136669d-7034-4342-9a9c-ccb2d6255933
+      target: '1740993596731'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: if-else
+        targetType: answer
+      id: 1740993293860-false-1740993632946-target
+      source: '1740993293860'
+      sourceHandle: 'false'
+      target: '1740993632946'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: answer
+        targetType: answer
+      id: 1740993632946-source-1740993031331-target
+      source: '1740993632946'
+      sourceHandle: source
+      target: '1740993031331'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: start
+        targetType: if-else
+      id: 1740968361642-source-1740993293860-target
+      source: '1740968361642'
+      sourceHandle: source
+      target: '1740993293860'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: llm
+        targetType: answer
+      id: 1740995644553-source-1740996020633-target
+      source: '1740995644553'
+      sourceHandle: source
+      target: '1740996020633'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: answer
+        targetType: answer
+      id: 1740996020633-source-1740993031331-target
+      source: '1740996020633'
+      sourceHandle: source
+      target: '1740993031331'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: answer
+        targetType: tool
+      id: 1740993417234-source-1740996380809-target
+      source: '1740993417234'
+      sourceHandle: source
+      target: '1740996380809'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: answer
+        targetType: tool
+      id: 1740993433539-source-1740996696921-target
+      source: '1740993433539'
+      sourceHandle: source
+      target: '1740996696921'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: answer
+        targetType: tool
+      id: 1740993596731-source-1740996828657-target
+      source: '1740993596731'
+      sourceHandle: source
+      target: '1740996828657'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: tool
+        targetType: variable-aggregator
+      id: 1740996380809-source-1740997582843-target
+      source: '1740996380809'
+      sourceHandle: source
+      target: '1740997582843'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: tool
+        targetType: variable-aggregator
+      id: 1740996696921-source-1740997582843-target
+      source: '1740996696921'
+      sourceHandle: source
+      target: '1740997582843'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: tool
+        targetType: variable-aggregator
+      id: 1740996828657-source-1740997582843-target
+      source: '1740996828657'
+      sourceHandle: source
+      target: '1740997582843'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: variable-aggregator
+        targetType: llm
+      id: 1740997582843-source-1740995644553-target
+      source: '1740997582843'
+      sourceHandle: source
+      target: '1740995644553'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: if-else
+        targetType: answer
+      id: 1740993293860-a3b16981-d34f-46f3-8de8-9f9ae9804f39-17410590313570-target
+      source: '1740993293860'
+      sourceHandle: a3b16981-d34f-46f3-8de8-9f9ae9804f39
+      target: '17410590313570'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: answer
+        targetType: tool
+      id: 17410590313570-source-1741059984731-target
+      source: '17410590313570'
+      sourceHandle: source
+      target: '1741059984731'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: tool
+        targetType: variable-aggregator
+      id: 1741059984731-source-1740997582843-target
+      source: '1741059984731'
+      sourceHandle: source
+      target: '1740997582843'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: if-else
+        targetType: answer
+      id: 1740993293860-52ebeb07-509c-4509-bcbe-66401826c1f9-17410600217420-target
+      source: '1740993293860'
+      sourceHandle: 52ebeb07-509c-4509-bcbe-66401826c1f9
+      target: '17410600217420'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: answer
+        targetType: tool
+      id: 17410600217420-source-1741060061075-target
+      source: '17410600217420'
+      sourceHandle: source
+      target: '1741060061075'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: tool
+        targetType: variable-aggregator
+      id: 1741060061075-source-1740997582843-target
+      source: '1741060061075'
+      sourceHandle: source
+      target: '1740997582843'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: if-else
+        targetType: answer
+      id: 1740993293860-91321025-34c2-4f17-9d06-7784bc6dfd6a-17410601111800-target
+      source: '1740993293860'
+      sourceHandle: 91321025-34c2-4f17-9d06-7784bc6dfd6a
+      target: '17410601111800'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: answer
+        targetType: tool
+      id: 17410601111800-source-1741060142675-target
+      source: '17410601111800'
+      sourceHandle: source
+      target: '1741060142675'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: tool
+        targetType: variable-aggregator
+      id: 1741060142675-source-1740997582843-target
+      source: '1741060142675'
+      sourceHandle: source
+      target: '1740997582843'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        desc: ''
+        selected: false
+        title: 开始
+        type: start
+        variables:
+        - label: 主题
+          max_length: 2048
+          options: []
+          required: true
+          type: paragraph
+          variable: theme
+      height: 90
+      id: '1740968361642'
+      position:
+        x: -861.6600660306173
+        y: 323.983273725319
+      positionAbsolute:
+        x: -861.6600660306173
+        y: 323.983273725319
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        answer: '命令执行完毕！
+
+          请问接下来你想让我执行什么操作呢？
+
+          1.生成房间的背景图片
+
+          2.生成房间中桌子的图片
+
+          3.生成大厅中荷官的图片
+
+          4.生成房间中荷官的图片
+
+          5.生成头像框图片
+
+          6.生成游戏中使用的贴纸
+
+          如果想修改主题，直接开启一个新的对话即可。
+
+
+
+          '
+        desc: ''
+        selected: false
+        title: 结束点
+        type: answer
+        variables: []
+      height: 196
+      id: '1740993031331'
+      position:
+        x: 2641.211713073974
+        y: 365.5189348050824
+      positionAbsolute:
+        x: 2641.211713073974
+        y: 365.5189348050824
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        cases:
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: is
+            id: 48466c8a-c6d0-47e9-9167-21d7ab97ed52
+            value: '1'
+            varType: string
+            variable_selector:
+            - sys
+            - query
+          id: 'true'
+          logical_operator: or
+        - case_id: 74f5b80e-4804-4077-835f-bf7f88d0b0ec
+          conditions:
+          - comparison_operator: is
+            id: c75c5e81-2655-4604-b6b0-e614423b60e9
+            value: '2'
+            varType: string
+            variable_selector:
+            - sys
+            - query
+          id: 74f5b80e-4804-4077-835f-bf7f88d0b0ec
+          logical_operator: and
+        - case_id: 2136669d-7034-4342-9a9c-ccb2d6255933
+          conditions:
+          - comparison_operator: is
+            id: bf483512-a074-4529-acf3-5a76c1bfa75d
+            value: '3'
+            varType: string
+            variable_selector:
+            - sys
+            - query
+          id: 2136669d-7034-4342-9a9c-ccb2d6255933
+          logical_operator: and
+        - case_id: a3b16981-d34f-46f3-8de8-9f9ae9804f39
+          conditions:
+          - comparison_operator: is
+            id: 54d4fdb1-c81d-4c13-8ca1-145006f09778
+            value: '4'
+            varType: string
+            variable_selector:
+            - sys
+            - query
+          id: a3b16981-d34f-46f3-8de8-9f9ae9804f39
+          logical_operator: and
+        - case_id: 52ebeb07-509c-4509-bcbe-66401826c1f9
+          conditions:
+          - comparison_operator: is
+            id: 4cda4afa-77f9-439a-8994-6696138ae458
+            value: '5'
+            varType: string
+            variable_selector:
+            - sys
+            - query
+          id: 52ebeb07-509c-4509-bcbe-66401826c1f9
+          logical_operator: and
+        - case_id: 91321025-34c2-4f17-9d06-7784bc6dfd6a
+          conditions:
+          - comparison_operator: is
+            id: e2877fbf-1bde-4ed2-a87e-13e122e846a6
+            value: '6'
+            varType: string
+            variable_selector:
+            - sys
+            - query
+          id: 91321025-34c2-4f17-9d06-7784bc6dfd6a
+          logical_operator: and
+        desc: ''
+        selected: false
+        title: 条件分支
+        type: if-else
+      height: 366
+      id: '1740993293860'
+      position:
+        x: -152.29796397822096
+        y: 338.4978607438208
+      positionAbsolute:
+        x: -152.29796397822096
+        y: 338.4978607438208
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        answer: '为用户生成房间背景：
+
+          '
+        desc: ''
+        selected: false
+        title: 背景生成
+        type: answer
+        variables: []
+      height: 100
+      id: '1740993417234'
+      position:
+        x: 368.92534431456204
+        y: 13.695692604209796
+      positionAbsolute:
+        x: 368.92534431456204
+        y: 13.695692604209796
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        answer: '为用户生成房间桌子图片：
+
+          '
+        desc: ''
+        selected: false
+        title: 房间桌子
+        type: answer
+        variables: []
+      height: 100
+      id: '1740993433539'
+      position:
+        x: 363.64731267147044
+        y: 120.76000097088891
+      positionAbsolute:
+        x: 363.64731267147044
+        y: 120.76000097088891
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        answer: '为用户生成大厅荷官图片：
+
+          '
+        desc: ''
+        selected: false
+        title: 大厅荷官
+        type: answer
+        variables: []
+      height: 100
+      id: '1740993596731'
+      position:
+        x: 368.92534431456204
+        y: 248.02379709637262
+      positionAbsolute:
+        x: 368.92534431456204
+        y: 248.02379709637262
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        answer: '对不起，您输入的操作命令不正确:
+
+          请在1，2，3，4，5，6中选择。
+
+
+          '
+        desc: ''
+        selected: false
+        title: 非法输入
+        type: answer
+        variables: []
+      height: 116
+      id: '1740993632946'
+      position:
+        x: 358.3153283489893
+        y: 841.5938481216448
+      positionAbsolute:
+        x: 358.3153283489893
+        y: 841.5938481216448
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        model:
+          completion_params: {}
+          mode: chat
+          name: Qwen/Qwen2.5-72B-Instruct
+          provider: siliconflow
+        prompt_template:
+        - id: 7eeeb979-6870-4452-872f-ee132e7a8667
+          role: system
+          text: '1.将数据{{#1740997582843.output#}}中的图片链接都提取出来，以markdown格式返回。
+
+            2.不要有多余的数据和说明，只返回markdown结果。
+
+            3.如果有多个图片，那么markdown图片之间用逗号隔开。'
+        selected: false
+        title: LLM
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 98
+      id: '1740995644553'
+      position:
+        x: 1668.8720458624102
+        y: 295.7360274149817
+      positionAbsolute:
+        x: 1668.8720458624102
+        y: 295.7360274149817
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        answer: '生成的结果：
+
+          {{#1740995644553.text#}}'
+        desc: ''
+        selected: false
+        title: 展示生成结果
+        type: answer
+        variables: []
+      height: 103
+      id: '1740996020633'
+      position:
+        x: 2029.4296644268024
+        y: 269.09979575944107
+      positionAbsolute:
+        x: 2029.4296644268024
+        y: 269.09979575944107
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        provider_id: 9c4f37cb-11a1-4250-ad0f-d094f318cbbb
+        provider_name: ' 房间背景工作流'
+        provider_type: workflow
+        selected: false
+        title: ' 房间背景工作流'
+        tool_configurations: {}
+        tool_label: ' 房间背景工作流'
+        tool_name: flux_wf_room_bg
+        tool_parameters:
+          theme:
+            type: mixed
+            value: '{{#1740968361642.theme#}}'
+        type: tool
+      height: 54
+      id: '1740996380809'
+      position:
+        x: 784.9334277197017
+        y: 94.84460287689495
+      positionAbsolute:
+        x: 784.9334277197017
+        y: 94.84460287689495
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        provider_id: aec3076e-5cca-4c5c-b64d-5e0cf52337e0
+        provider_name: 房间桌子工作流
+        provider_type: workflow
+        selected: false
+        title: 房间桌子工作流
+        tool_configurations: {}
+        tool_label: 房间桌子工作流
+        tool_name: flux_wf_room_desk
+        tool_parameters:
+          theme:
+            type: mixed
+            value: '{{#1740968361642.theme#}}'
+        type: tool
+      height: 54
+      id: '1740996696921'
+      position:
+        x: 796.9334277197017
+        y: 234.82871798864375
+      positionAbsolute:
+        x: 796.9334277197017
+        y: 234.82871798864375
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        provider_id: 24ef1d9e-64a3-4818-960c-70d08e47cd5d
+        provider_name: 荷官工作流（大厅）
+        provider_type: workflow
+        selected: false
+        title: 荷官工作流（大厅）
+        tool_configurations: {}
+        tool_label: 荷官工作流（大厅）
+        tool_name: flux_wf_lobby_girl
+        tool_parameters:
+          theme:
+            type: mixed
+            value: '{{#1740968361642.theme#}}'
+        type: tool
+      height: 54
+      id: '1740996828657'
+      position:
+        x: 784.9334277197017
+        y: 338.4978607438208
+      positionAbsolute:
+        x: 784.9334277197017
+        y: 338.4978607438208
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        advanced_settings:
+          group_enabled: false
+          groups:
+          - groupId: bc738ce7-39e6-4b61-b7b0-fcdda65b14bd
+            group_name: Group1
+            output_type: string
+            variables:
+            - - '1740996828657'
+              - text
+            - - '1740996696921'
+              - text
+            - - '1740996380809'
+              - text
+        desc: ''
+        output_type: string
+        selected: false
+        title: 变量聚合器
+        type: variable-aggregator
+        variables:
+        - - '1740996380809'
+          - text
+        - - '1740996696921'
+          - text
+        - - '1740996828657'
+          - text
+        - - '1741059984731'
+          - text
+        - - '1741060061075'
+          - text
+        - - '1741060142675'
+          - text
+      height: 218
+      id: '1740997582843'
+      position:
+        x: 1318.9330366853776
+        y: 357.88040664190794
+      positionAbsolute:
+        x: 1318.9330366853776
+        y: 357.88040664190794
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        answer: '为用户生成房间荷官图片：
+
+          '
+        desc: ''
+        selected: false
+        title: 房间荷官
+        type: answer
+        variables: []
+      height: 100
+      id: '17410590313570'
+      position:
+        x: 358.3153283489893
+        y: 380.54298733892085
+      positionAbsolute:
+        x: 358.3153283489893
+        y: 380.54298733892085
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        provider_id: cd0235f4-3009-44aa-98c2-18a7a70d0ec0
+        provider_name: 荷官工作流（房间）
+        provider_type: workflow
+        selected: false
+        title: 荷官工作流（房间）
+        tool_configurations: {}
+        tool_label: 荷官工作流（房间）
+        tool_name: flux_wf_room_girl
+        tool_parameters:
+          theme:
+            type: mixed
+            value: '{{#1740968361642.theme#}}'
+        type: tool
+      height: 54
+      id: '1741059984731'
+      position:
+        x: 784.9334277197017
+        y: 462.77377903210197
+      positionAbsolute:
+        x: 784.9334277197017
+        y: 462.77377903210197
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        answer: '为用户生成头像框图片：
+
+          '
+        desc: ''
+        selected: false
+        title: 头像框
+        type: answer
+        variables: []
+      height: 100
+      id: '17410600217420'
+      position:
+        x: 358.3153283489893
+        y: 525.5828690261267
+      positionAbsolute:
+        x: 358.3153283489893
+        y: 525.5828690261267
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        provider_id: 80d00888-984b-4d31-9ba8-a5a56591efb2
+        provider_name: 头像框工作流
+        provider_type: workflow
+        selected: false
+        title: 头像框工作流
+        tool_configurations: {}
+        tool_label: 头像框工作流
+        tool_name: flux_wf_head_frame
+        tool_parameters:
+          theme:
+            type: mixed
+            value: '{{#1740968361642.theme#}}'
+        type: tool
+      height: 54
+      id: '1741060061075'
+      position:
+        x: 784.9334277197017
+        y: 583.0392062036707
+      positionAbsolute:
+        x: 784.9334277197017
+        y: 583.0392062036707
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        answer: '为用户生成贴纸图片：
+
+          '
+        desc: ''
+        selected: false
+        title: 贴纸
+        type: answer
+        variables: []
+      height: 100
+      id: '17410601111800'
+      position:
+        x: 348.6928421557012
+        y: 673.0806619539674
+      positionAbsolute:
+        x: 348.6928421557012
+        y: 673.0806619539674
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        provider_id: 2a99b2c5-c42c-4f80-86d0-b5be01009e62
+        provider_name: 贴纸工作流
+        provider_type: workflow
+        selected: false
+        title: 贴纸工作流
+        tool_configurations: {}
+        tool_label: 贴纸工作流
+        tool_name: flux_wf_game_goods
+        tool_parameters:
+          theme:
+            type: mixed
+            value: '{{#1740968361642.theme#}}'
+        type: tool
+      height: 54
+      id: '1741060142675'
+      position:
+        x: 774.5699210171583
+        y: 701.8088305427394
+      positionAbsolute:
+        x: 774.5699210171583
+        y: 701.8088305427394
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    viewport:
+      x: 830.2189483022875
+      y: 130.51235309543102
+      zoom: 0.757858283255201

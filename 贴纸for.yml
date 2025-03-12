@@ -1,0 +1,273 @@
+app:
+  description: ''
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  mode: workflow
+  name: 贴纸for
+  use_icon_as_answer_icon: false
+kind: app
+version: 0.1.5
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInIteration: false
+        sourceType: llm
+        targetType: code
+      id: 1741346035836-source-1741346999148-target
+      source: '1741346035836'
+      sourceHandle: source
+      target: '1741346999148'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: code
+        targetType: end
+      id: 1741346999148-source-1741346038067-target
+      source: '1741346999148'
+      sourceHandle: source
+      target: '1741346038067'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: start
+        targetType: code
+      id: 1741346032234-source-1741588516592-target
+      source: '1741346032234'
+      sourceHandle: source
+      target: '1741588516592'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: code
+        targetType: llm
+      id: 1741588516592-source-1741346035836-target
+      source: '1741588516592'
+      sourceHandle: source
+      target: '1741346035836'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        desc: ''
+        selected: false
+        title: 开始
+        type: start
+        variables:
+        - allowed_file_extensions: []
+          allowed_file_types:
+          - image
+          allowed_file_upload_methods:
+          - local_file
+          - remote_url
+          label: 主题
+          max_length: 2048
+          options: []
+          required: true
+          type: paragraph
+          variable: theme
+        - label: 数量
+          max_length: 48
+          options: []
+          required: true
+          type: number
+          variable: numer
+      height: 116
+      id: '1741346032234'
+      position:
+        x: 30
+        y: 257.5
+      positionAbsolute:
+        x: 30
+        y: 257.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        model:
+          completion_params: {}
+          mode: chat
+          name: Qwen/Qwen2.5-72B-Instruct
+          provider: siliconflow
+        prompt_template:
+        - id: b3d632a5-e369-4546-a3ea-8c489d0b7d5f
+          role: system
+          text: '用户要生成游戏中使用的贴纸，请你从日常生活中的各种物品中随机选择其中的{{#1741346032234.numer#}}个物品用作贴纸主体，要符合{{#1741346032234.theme#}}，另外用户希望每次都生成不同的内容，请以随机数：{{#1741588516592.seed#}}
+            作为种子来生成结果，随机性要大。
+
+            要求：
+
+            1. 中文输出，只有主体。
+
+            2. {{#1741346032234.numer#}}个放在一个json数组中， 1的输出直接放在数组的item中。
+
+            3. 除了1，2的要求，不要输出任何其它的信息。
+
+            4. 只要结果，不要加markdown代码格式"```"，直接把数组给我。
+
+            5. 数组是个一维数组，数组的value直接是主体。'
+        selected: true
+        title: LLM
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 98
+      id: '1741346035836'
+      position:
+        x: 636
+        y: 257.5
+      positionAbsolute:
+        x: 636
+        y: 257.5
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        outputs:
+        - value_selector:
+          - '1741346035836'
+          - text
+          variable: result
+        selected: false
+        title: 结束
+        type: end
+      height: 90
+      id: '1741346038067'
+      position:
+        x: 1242
+        y: 257.5
+      positionAbsolute:
+        x: 1242
+        y: 257.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        code: "import re\ndef main(jsonStr:str) -> dict:\n    promp_text = extract_result_prompt(jsonStr)\n\
+          \    return {\n        \"prompt\":promp_text\n    }\n\ndef extract_result_prompt(original_text:\
+          \ str) -> str:\n    \"\"\"\n    两步处理：\n    1. 删除<details>标签及其内容（支持跨多行）\n\
+          \    2. 提取并验证JSON中的result_prompt字段\n    \"\"\"\n    # 第一步：正则删除<details>块（含任意内容）\n\
+          \    cleaned_text = re.sub(r'<details[^>]*>.*?</details>', '', original_text,\
+          \ flags=re.DOTALL)\n    return cleaned_text.strip('\\n').strip('\"').replace('\"\
+          ', '').replace('\\'', '').replace('\\\\', '').strip()    \n"
+        code_language: python3
+        desc: ''
+        outputs:
+          prompt:
+            children: null
+            type: string
+        selected: false
+        title: 代码执行
+        type: code
+        variables:
+        - value_selector:
+          - '1741346035836'
+          - text
+          variable: jsonStr
+      height: 54
+      id: '1741346999148'
+      position:
+        x: 939
+        y: 257.5
+      positionAbsolute:
+        x: 939
+        y: 257.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        code: "import secrets\ndef main() -> dict:\n    seed = secrets.randbelow(999999999999999)\n\
+          \    return {\"seed\": seed}"
+        code_language: python3
+        desc: ''
+        outputs:
+          seed:
+            children: null
+            type: number
+        selected: false
+        title: 获取种子
+        type: code
+        variables: []
+      height: 54
+      id: '1741588516592'
+      position:
+        x: 333
+        y: 257.5
+      positionAbsolute:
+        x: 333
+        y: 257.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    viewport:
+      x: -200.7939702759718
+      y: -9.068778161601358
+      zoom: 1.218770788614574

@@ -1,0 +1,390 @@
+app:
+  description: 生成头像框
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  mode: workflow
+  name: 头像框工作流
+  use_icon_as_answer_icon: false
+kind: app
+version: 0.1.5
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInIteration: false
+        sourceType: start
+        targetType: tool
+      id: 1740136912372-source-1740479188325-target
+      source: '1740136912372'
+      sourceHandle: source
+      target: '1740479188325'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: tool
+        targetType: code
+      id: 1740479188325-source-1740479192892-target
+      source: '1740479188325'
+      sourceHandle: source
+      target: '1740479192892'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: start
+        targetType: code
+      id: 1740136912372-source-1740479202988-target
+      source: '1740136912372'
+      sourceHandle: source
+      target: '1740479202988'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: code
+        targetType: http-request
+      id: 1740479192892-source-1740479150485-target
+      source: '1740479192892'
+      sourceHandle: source
+      target: '1740479150485'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: code
+        targetType: http-request
+      id: 1740479202988-source-1740479150485-target
+      source: '1740479202988'
+      sourceHandle: source
+      target: '1740479150485'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: http-request
+        targetType: code
+      id: 1740479150485-source-1740479215748-target
+      source: '1740479150485'
+      sourceHandle: source
+      target: '1740479215748'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: code
+        targetType: end
+      id: 1740479215748-source-1740136914478-target
+      source: '1740479215748'
+      sourceHandle: source
+      target: '1740136914478'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        desc: ''
+        selected: false
+        title: 开始
+        type: start
+        variables:
+        - label: 主题
+          max_length: 2048
+          options: []
+          required: true
+          type: paragraph
+          variable: theme
+      height: 89
+      id: '1740136912372'
+      position:
+        x: 57
+        y: 282
+      positionAbsolute:
+        x: 57
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 243
+    - data:
+        desc: ''
+        outputs:
+        - value_selector:
+          - '1740479215748'
+          - result
+          variable: result
+        selected: false
+        title: 结束
+        type: end
+      height: 89
+      id: '1740136914478'
+      position:
+        x: 1676
+        y: 282
+      positionAbsolute:
+        x: 1676
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 243
+    - data:
+        authorization:
+          config: null
+          type: no-auth
+        body:
+          data:
+          - id: key-value-1
+            key: ''
+            type: text
+            value: "{\"prompt\":{\n  \"1\": {\n    \"inputs\": {\n      \"seed\":\
+              \ {{#1740479202988.seed#}},\n      \"steps\": 20,\n      \"cfg\": 1,\n\
+              \      \"sampler_name\": \"dpmpp_2m\",\n      \"scheduler\": \"simple\"\
+              ,\n      \"denoise\": 1,\n      \"model\": [\n        \"2\",\n     \
+              \   0\n      ],\n      \"positive\": [\n        \"3\",\n        0\n\
+              \      ],\n      \"negative\": [\n        \"4\",\n        0\n      ],\n\
+              \      \"latent_image\": [\n        \"7\",\n        0\n      ]\n   \
+              \ },\n    \"class_type\": \"KSampler\",\n    \"_meta\": {\n      \"\
+              title\": \"K采样器\"\n    }\n  },\n  \"2\": {\n    \"inputs\": {\n    \
+              \  \"unet_name\": \"flux1-FP8-dev.safetensors\",\n      \"weight_dtype\"\
+              : \"fp8_e4m3fn\"\n    },\n    \"class_type\": \"UNETLoader\",\n    \"\
+              _meta\": {\n      \"title\": \"UNET加载器\"\n    }\n  },\n  \"3\": {\n\
+              \    \"inputs\": {\n      \"text\": \"{{#1740479192892.prompt#}}\",\n\
+              \      \"clip\": [\n        \"6\",\n        0\n      ]\n    },\n   \
+              \ \"class_type\": \"CLIPTextEncode\",\n    \"_meta\": {\n      \"title\"\
+              : \"CLIP文本编码器（正向提示词）\"\n    }\n  },\n  \"4\": {\n    \"inputs\": {\n\
+              \      \"text\": \"\",\n      \"clip\": [\n        \"6\",\n        0\n\
+              \      ]\n    },\n    \"class_type\": \"CLIPTextEncode\",\n    \"_meta\"\
+              : {\n      \"title\": \"CLIP文本编码器\"\n    }\n  },\n  \"6\": {\n    \"\
+              inputs\": {\n      \"clip_name1\": \"t5xxl_fp16.safetensors\",\n   \
+              \   \"clip_name2\": \"clip_l.safetensors\",\n      \"type\": \"flux\"\
+              ,\n      \"device\": \"default\"\n    },\n    \"class_type\": \"DualCLIPLoader\"\
+              ,\n    \"_meta\": {\n      \"title\": \"双CLIP加载器\"\n    }\n  },\n  \"\
+              7\": {\n    \"inputs\": {\n      \"width\": 1024,\n      \"height\"\
+              : 1024,\n      \"batch_size\": 2\n    },\n    \"class_type\": \"EmptyLatentImage\"\
+              ,\n    \"_meta\": {\n      \"title\": \"空Latent\"\n    }\n  },\n  \"\
+              8\": {\n    \"inputs\": {\n      \"samples\": [\n        \"1\",\n  \
+              \      0\n      ],\n      \"vae\": [\n        \"9\",\n        0\n  \
+              \    ]\n    },\n    \"class_type\": \"VAEDecode\",\n    \"_meta\": {\n\
+              \      \"title\": \"VAE解码\"\n    }\n  },\n  \"9\": {\n    \"inputs\"\
+              : {\n      \"vae_name\": \"FLUX.1-vae.sft\"\n    },\n    \"class_type\"\
+              : \"VAELoader\",\n    \"_meta\": {\n      \"title\": \"VAE加载器\"\n  \
+              \  }\n  },\n  \"10\": {\n    \"inputs\": {\n      \"filename_prefix\"\
+              : \"ComfyUI\",\n      \"images\": [\n        \"8\",\n        0\n   \
+              \   ]\n    },\n    \"class_type\": \"SaveImage\",\n    \"_meta\": {\n\
+              \      \"title\": \"保存图像\"\n    }\n  }\n}\n}"
+          type: json
+        desc: ''
+        headers: Content-Type:application/json
+        method: post
+        params: ''
+        retry_config:
+          max_retries: 3
+          retry_enabled: true
+          retry_interval: 100
+        selected: false
+        timeout:
+          max_connect_timeout: 0
+          max_read_timeout: 0
+          max_write_timeout: 0
+        title: HTTP 请求
+        type: http-request
+        url: http://172.16.50.118:8188/prompt
+        variables: []
+      height: 134
+      id: '1740479150485'
+      position:
+        x: 1017
+        y: 303
+      positionAbsolute:
+        x: 1017
+        y: 303
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 243
+    - data:
+        desc: ''
+        provider_id: 33192eee-1b01-4896-98bf-bc3bd245d036
+        provider_name: 提示词增强工具
+        provider_type: workflow
+        selected: true
+        title: 提示词增强工具
+        tool_configurations: {}
+        tool_label: 提示词增强工具
+        tool_name: prompt_enhance
+        tool_parameters:
+          input_prompt:
+            type: mixed
+            value: 在游戏中使用的一个圆形的头像框，现实渲染风格,纯白色背景，{{#1740136912372.theme#}}，对焦清晰，细节丰富
+        type: tool
+      height: 53
+      id: '1740479188325'
+      position:
+        x: 377
+        y: 421
+      positionAbsolute:
+        x: 377
+        y: 421
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 243
+    - data:
+        code: "import re\nimport json\ndef main(jsonObj) -> dict:\n    prompt = jsonObj[0][\"\
+          result\"]\n    return {\n        \"prompt\":prompt\n    }"
+        code_language: python3
+        desc: ''
+        outputs:
+          prompt:
+            children: null
+            type: string
+        selected: false
+        title: 获取提示词
+        type: code
+        variables:
+        - value_selector:
+          - '1740479188325'
+          - json
+          variable: jsonObj
+      height: 53
+      id: '1740479192892'
+      position:
+        x: 681
+        y: 421
+      positionAbsolute:
+        x: 681
+        y: 421
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 243
+    - data:
+        code: "import secrets\ndef main() -> dict:\n    seed = secrets.randbelow(999999999999999)\n\
+          \    return {\"seed\": seed}"
+        code_language: python3
+        desc: ''
+        outputs:
+          seed:
+            children: null
+            type: number
+        selected: false
+        title: 获取种子
+        type: code
+        variables: []
+      height: 53
+      id: '1740479202988'
+      position:
+        x: 411
+        y: 255
+      positionAbsolute:
+        x: 411
+        y: 255
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 243
+    - data:
+        code: "\nimport json\nimport requests\nimport time\ndef main(body: str) ->\
+          \ dict:\n    data= json.loads(body)\n    prompt_id=data[\"prompt_id\"]\n\
+          \    number=data[\"number\"]\n    images=[]\n    image_urls=[]\n    while\
+          \ True:\n        time.sleep(3)\n        data = requests.get(\"http://172.16.50.118:8188/history/\"\
+          +prompt_id).json()\n        if prompt_id in data:\n            status=data[prompt_id][\"\
+          status\"]\n            if status[\"completed\"] and status[\"status_str\"\
+          ]==\"success\":\n                images=data[prompt_id][\"outputs\"][\"\
+          10\"][\"images\"]\n                break\n        else:\n            continue\n\
+          \    for img in images:\n        image_urls.append(\n            \"http://172.16.50.118:8188/view?filename=\"\
+          +img[\"filename\"]+\"&subfolder=\"+img[\"subfolder\"]+\"&type=output\"\n\
+          \        )\n    return {\n        \"result\": image_urls ,\n    }\n"
+        code_language: python3
+        desc: ''
+        outputs:
+          result:
+            children: null
+            type: array[string]
+        retry_config:
+          max_retries: 10
+          retry_enabled: true
+          retry_interval: 2176
+        selected: false
+        title: 等待ComfyUI出图
+        type: code
+        variables:
+        - value_selector:
+          - '1740479150485'
+          - body
+          variable: body
+      height: 78
+      id: '1740479215748'
+      position:
+        x: 1327
+        y: 282
+      positionAbsolute:
+        x: 1327
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 243
+    viewport:
+      x: -188
+      y: -17.5
+      zoom: 1

@@ -1,0 +1,300 @@
+app:
+  description: ''
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  mode: workflow
+  name: comfyui-test
+  use_icon_as_answer_icon: false
+kind: app
+version: 0.1.5
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInIteration: false
+        sourceType: start
+        targetType: http-request
+      id: 1736598128218-source-1736598142615-target
+      source: '1736598128218'
+      sourceHandle: source
+      target: '1736598142615'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: http-request
+        targetType: code
+      id: 1736598142615-source-1736599989238-target
+      source: '1736598142615'
+      sourceHandle: source
+      target: '1736599989238'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: code
+        targetType: end
+      id: 1736599989238-source-1736598145776-target
+      source: '1736599989238'
+      sourceHandle: source
+      target: '1736598145776'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        desc: ''
+        selected: false
+        title: 开始
+        type: start
+        variables:
+        - label: prompt
+          max_length: 300
+          options: []
+          required: true
+          type: paragraph
+          variable: prompt
+        - label: number
+          max_length: 48
+          options: []
+          required: true
+          type: number
+          variable: number
+      height: 116
+      id: '1736598128218'
+      position:
+        x: 30
+        y: 268
+      positionAbsolute:
+        x: 30
+        y: 268
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        authorization:
+          config: null
+          type: no-auth
+        body:
+          data:
+          - id: key-value-2
+            key: ''
+            type: text
+            value: "{\"prompt\":{\n  \"3\": {\n    \"inputs\": {\n      \"seed\":\
+              \ [\n        \"33\",\n        0\n      ],\n      \"steps\": 20,\n  \
+              \    \"cfg\": 8,\n      \"sampler_name\": \"euler\",\n      \"scheduler\"\
+              : \"normal\",\n      \"denoise\": 1,\n      \"model\": [\n        \"\
+              13\",\n        0\n      ],\n      \"positive\": [\n        \"6\",\n\
+              \        0\n      ],\n      \"negative\": [\n        \"7\",\n      \
+              \  0\n      ],\n      \"latent_image\": [\n        \"5\",\n        0\n\
+              \      ]\n    },\n    \"class_type\": \"KSampler\",\n    \"_meta\":\
+              \ {\n      \"title\": \"K采样器\"\n    }\n  },\n  \"4\": {\n    \"inputs\"\
+              : {\n      \"ckpt_name\": \"【全网首发】真实人像SDXL1.0_v1.0.ckpt\"\n    },\n\
+              \    \"class_type\": \"CheckpointLoaderSimple\",\n    \"_meta\": {\n\
+              \      \"title\": \"Checkpoint加载器(简易)\"\n    }\n  },\n  \"5\": {\n \
+              \   \"inputs\": {\n      \"width\": 1024,\n      \"height\": 1024,\n\
+              \      \"batch_size\": {{#1736598128218.number#}}\n    },\n    \"class_type\"\
+              : \"EmptyLatentImage\",\n    \"_meta\": {\n      \"title\": \"空Latent\"\
+              \n    }\n  },\n  \"6\": {\n    \"inputs\": {\n      \"text\": [\n  \
+              \      \"31\",\n        0\n      ],\n      \"clip\": [\n        \"4\"\
+              ,\n        1\n      ]\n    },\n    \"class_type\": \"CLIPTextEncode\"\
+              ,\n    \"_meta\": {\n      \"title\": \"CLIP文本编码器\"\n    }\n  },\n \
+              \ \"7\": {\n    \"inputs\": {\n      \"text\": \"text, watermark，leg,\
+              \ shadow,bad anatomy, extra limbs, long neck, deformed, blurry, low\
+              \ quality, artifacts，ugly, poorly drawn, out of focus, distorted, low\
+              \ resolution, grainy, poorly lit\",\n      \"clip\": [\n        \"4\"\
+              ,\n        1\n      ]\n    },\n    \"class_type\": \"CLIPTextEncode\"\
+              ,\n    \"_meta\": {\n      \"title\": \"CLIP文本编码器\"\n    }\n  },\n \
+              \ \"13\": {\n    \"inputs\": {\n      \"config\": \"SDXL, Conv Injection\"\
+              ,\n      \"weight\": 1,\n      \"model\": [\n        \"4\",\n      \
+              \  0\n      ]\n    },\n    \"class_type\": \"LayeredDiffusionApply\"\
+              ,\n    \"_meta\": {\n      \"title\": \"应用LayerDiffusion\"\n    }\n\
+              \  },\n  \"14\": {\n    \"inputs\": {\n      \"samples\": [\n      \
+              \  \"3\",\n        0\n      ],\n      \"vae\": [\n        \"4\",\n \
+              \       2\n      ]\n    },\n    \"class_type\": \"VAEDecode\",\n   \
+              \ \"_meta\": {\n      \"title\": \"VAE解码\"\n    }\n  },\n  \"15\": {\n\
+              \    \"inputs\": {\n      \"sd_version\": \"SDXL\",\n      \"sub_batch_size\"\
+              : 16,\n      \"samples\": [\n        \"3\",\n        0\n      ],\n \
+              \     \"images\": [\n        \"14\",\n        0\n      ]\n    },\n \
+              \   \"class_type\": \"LayeredDiffusionDecode\",\n    \"_meta\": {\n\
+              \      \"title\": \"LayerDiffusion解码\"\n    }\n  },\n  \"20\": {\n \
+              \   \"inputs\": {\n      \"images\": [\n        \"14\",\n        0\n\
+              \      ]\n    },\n    \"class_type\": \"PreviewImage\",\n    \"_meta\"\
+              : {\n      \"title\": \"预览图像\"\n    }\n  },\n  \"23\": {\n    \"inputs\"\
+              : {\n      \"images\": [\n        \"15\",\n        0\n      ]\n    },\n\
+              \    \"class_type\": \"PreviewImage\",\n    \"_meta\": {\n      \"title\"\
+              : \"预览图像\"\n    }\n  },\n  \"24\": {\n    \"inputs\": {\n      \"mask\"\
+              : [\n        \"15\",\n        1\n      ]\n    },\n    \"class_type\"\
+              : \"MaskToImage\",\n    \"_meta\": {\n      \"title\": \"遮罩到图像\"\n \
+              \   }\n  },\n  \"25\": {\n    \"inputs\": {\n      \"images\": [\n \
+              \       \"24\",\n        0\n      ]\n    },\n    \"class_type\": \"\
+              PreviewImage\",\n    \"_meta\": {\n      \"title\": \"预览图像\"\n    }\n\
+              \  },\n  \"27\": {\n    \"inputs\": {\n      \"images\": [\n       \
+              \ \"28\",\n        0\n      ]\n    },\n    \"class_type\": \"PreviewImage\"\
+              ,\n    \"_meta\": {\n      \"title\": \"预览图像\"\n    }\n  },\n  \"28\"\
+              : {\n    \"inputs\": {\n      \"image\": [\n        \"15\",\n      \
+              \  0\n      ],\n      \"alpha\": [\n        \"29\",\n        0\n   \
+              \   ]\n    },\n    \"class_type\": \"JoinImageWithAlpha\",\n    \"_meta\"\
+              : {\n      \"title\": \"合并图像Alpha\"\n    }\n  },\n  \"29\": {\n    \"\
+              inputs\": {\n      \"mask\": [\n        \"15\",\n        1\n      ]\n\
+              \    },\n    \"class_type\": \"InvertMask\",\n    \"_meta\": {\n   \
+              \   \"title\": \"遮罩反转\"\n    }\n  },\n  \"30\": {\n    \"inputs\": {\n\
+              \      \"filename_prefix\": \"ComfyUI\",\n      \"images\": [\n    \
+              \    \"28\",\n        0\n      ]\n    },\n    \"class_type\": \"SaveImage\"\
+              ,\n    \"_meta\": {\n      \"title\": \"保存图像\"\n    }\n  },\n  \"31\"\
+              : {\n    \"inputs\": {\n      \"from_translate\": \"auto\",\n      \"\
+              to_translate\": \"english\",\n      \"add_proxies\": false,\n      \"\
+              proxies\": \"\",\n      \"auth_data\": \"\",\n      \"service\": \"\
+              GoogleTranslator\",\n      \"text\": \"{{#1736598128218.prompt#}}\"\
+              ,\n      \"Show proxy\": \"proxy_hide\",\n      \"Show authorization\"\
+              : \"authorization_hide\"\n    },\n    \"class_type\": \"DeepTranslatorTextNode\"\
+              ,\n    \"_meta\": {\n      \"title\": \"翻译文本(高级)\"\n    }\n  },\n  \"\
+              33\": {\n    \"inputs\": {\n      \"seed\": 813498197774048\n    },\n\
+              \    \"class_type\": \"Seed_\",\n    \"_meta\": {\n      \"title\":\
+              \ \"随机种\"\n    }\n  }\n}\n}"
+          type: json
+        desc: ''
+        headers: Content-Type:application/json
+        method: post
+        params: ''
+        retry_config:
+          max_retries: 3
+          retry_enabled: true
+          retry_interval: 100
+        selected: false
+        timeout:
+          max_connect_timeout: 0
+          max_read_timeout: 0
+          max_write_timeout: 0
+        title: HTTP 请求
+        type: http-request
+        url: http://172.16.50.118:8188/prompt
+        variables: []
+      height: 136
+      id: '1736598142615'
+      position:
+        x: 334
+        y: 268
+      positionAbsolute:
+        x: 334
+        y: 268
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        outputs:
+        - value_selector:
+          - '1736599989238'
+          - result
+          variable: body
+        selected: false
+        title: 结束
+        type: end
+      height: 90
+      id: '1736598145776'
+      position:
+        x: 942
+        y: 268
+      positionAbsolute:
+        x: 942
+        y: 268
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        code: "\nimport json\nimport requests\nimport time\ndef main(body: str) ->\
+          \ dict:\n    data= json.loads(body)\n    prompt_id=data[\"prompt_id\"]\n\
+          \    number=data[\"number\"]\n    images=[]\n    image_urls=[]\n    while\
+          \ True:\n        time.sleep(3)\n        data = requests.get(\"http://172.16.50.118:8188/history/\"\
+          +prompt_id).json()\n        if prompt_id in data:\n            status=data[prompt_id][\"\
+          status\"]\n            if status[\"completed\"] and status[\"status_str\"\
+          ]==\"success\":\n                images=data[prompt_id][\"outputs\"][\"\
+          30\"][\"images\"]\n                break\n        else:\n            continue\n\
+          \    for img in images:\n        image_urls.append(\n            \"http://172.16.50.118:8188/view?filename=\"\
+          +img[\"filename\"]+\"&subfolder=\"+img[\"subfolder\"]+\"&type=output\"\n\
+          \        )\n    return {\n        \"result\": image_urls ,\n    }\n"
+        code_language: python3
+        desc: ''
+        outputs:
+          result:
+            children: null
+            type: array[string]
+        selected: true
+        title: 代码执行 2
+        type: code
+        variables:
+        - value_selector:
+          - '1736598142615'
+          - body
+          variable: body
+      height: 54
+      id: '1736599989238'
+      position:
+        x: 638
+        y: 268
+      positionAbsolute:
+        x: 638
+        y: 268
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    viewport:
+      x: 175.4150394202229
+      y: -21.5171264487891
+      zoom: 0.6751109867124214

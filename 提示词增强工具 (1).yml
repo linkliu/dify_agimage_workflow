@@ -1,0 +1,242 @@
+app:
+  description: 提示词增强工具
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  mode: workflow
+  name: 提示词增强工具
+  use_icon_as_answer_icon: false
+kind: app
+version: 0.1.5
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInIteration: false
+        sourceType: start
+        targetType: llm
+      id: 1739263015702-source-1739263126347-target
+      selected: false
+      source: '1739263015702'
+      sourceHandle: source
+      target: '1739263126347'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: llm
+        targetType: code
+      id: 1739263126347-source-1740452378798-target
+      source: '1739263126347'
+      sourceHandle: source
+      target: '1740452378798'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: code
+        targetType: end
+      id: 1740452378798-source-1739263322475-target
+      source: '1740452378798'
+      sourceHandle: source
+      target: '1739263322475'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        desc: ''
+        selected: false
+        title: 开始
+        type: start
+        variables:
+        - label: 输入提示词
+          max_length: 4096
+          options: []
+          required: true
+          type: paragraph
+          variable: input_prompt
+      height: 90
+      id: '1739263015702'
+      position:
+        x: -308.1326086141143
+        y: 218.96204230007623
+      positionAbsolute:
+        x: -308.1326086141143
+        y: 218.96204230007623
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: true
+          variable_selector:
+          - '1739263015702'
+          - input_prompt
+        desc: ''
+        model:
+          completion_params: {}
+          mode: chat
+          name: deepseek/deepseek-r1
+          provider: openrouter
+        prompt_template:
+        - id: 9e4024ae-bd0b-4aa1-875e-d36b16d50a7c
+          role: system
+          text: '你是一个 FLUX1 prompt 专家，为我生成适用于 FLUX1 模型的prompt。
+
+            我给你相关的单词，你帮我扩写为适合 FLUX1  文生图的 prompt。要求：
+
+            1. 英文输出。
+
+            2. 除了 prompt 外，不要输出任何其它的信息。
+
+            3. 如果提示词中出现了双引号或单引号，请在双引号和单引号前面添加转义字符''\''。
+
+            4. 需要是一个完整的自然语言句子，输出的提示词不要用双引号包裹。
+
+            5. 如果有中文的双引号或者单引号，请用英文的双引号和单引号代替。
+
+
+
+            '
+        - edition_type: basic
+          id: d305c955-2441-47ee-935a-c9ac83517679
+          role: user
+          text: '{{#1739263015702.input_prompt#}}'
+        retry_config:
+          max_retries: 10
+          retry_enabled: true
+          retry_interval: 2078
+        selected: false
+        title: LLM
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 124
+      id: '1739263126347'
+      position:
+        x: 136.18649511122038
+        y: 218.96204230007623
+      positionAbsolute:
+        x: 136.18649511122038
+        y: 218.96204230007623
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        outputs:
+        - value_selector:
+          - '1740452378798'
+          - prompt
+          variable: result
+        selected: false
+        title: 结束
+        type: end
+      height: 90
+      id: '1739263322475'
+      position:
+        x: 863.2781745244134
+        y: 218.96204230007623
+      positionAbsolute:
+        x: 863.2781745244134
+        y: 218.96204230007623
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        code: "import re\ndef main(jsonStr:str) -> dict:\n    promp_text = extract_result_prompt(jsonStr)\n\
+          \    return {\n        \"prompt\":promp_text\n    }\n\ndef extract_result_prompt(original_text:\
+          \ str) -> str:\n    \"\"\"\n    两步处理：\n    1. 删除<details>标签及其内容（支持跨多行）\n\
+          \    2. 提取并验证JSON中的result_prompt字段\n    \"\"\"\n    # 第一步：正则删除<details>块（含任意内容）\n\
+          \    cleaned_text = re.sub(r'<details[^>]*>.*?</details>', '', original_text,\
+          \ flags=re.DOTALL)\n    return cleaned_text.strip('\\n').strip('\"').replace('\"\
+          ', '').replace('\\'', '').replace('\\\\', '').strip()    \n"
+        code_language: python3
+        desc: ''
+        outputs:
+          prompt:
+            children: null
+            type: string
+        retry_config:
+          max_retries: 10
+          retry_enabled: false
+          retry_interval: 100
+        selected: true
+        title: 代码执行
+        type: code
+        variables:
+        - value_selector:
+          - '1739263126347'
+          - text
+          variable: jsonStr
+      height: 54
+      id: '1740452378798'
+      position:
+        x: 507.18168447533264
+        y: 218.96204230007623
+      positionAbsolute:
+        x: 507.18168447533264
+        y: 218.96204230007623
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    viewport:
+      x: -69.4035367139511
+      y: 127.24152843097076
+      zoom: 1.0610015965572792

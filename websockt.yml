@@ -1,0 +1,189 @@
+app:
+  description: ''
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  mode: workflow
+  name: websockt
+  use_icon_as_answer_icon: false
+kind: app
+version: 0.1.5
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInIteration: false
+        sourceType: start
+        targetType: code
+      id: 1739179614116-source-1739179617084-target
+      source: '1739179614116'
+      sourceHandle: source
+      target: '1739179617084'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: code
+        targetType: end
+      id: 1739179617084-source-1739179619603-target
+      source: '1739179617084'
+      sourceHandle: source
+      target: '1739179619603'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        desc: ''
+        selected: false
+        title: 开始
+        type: start
+        variables: []
+      height: 53
+      id: '1739179614116'
+      position:
+        x: 80
+        y: 282
+      positionAbsolute:
+        x: 80
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 243
+    - data:
+        code: "#This is an example that uses the websockets api to know when a prompt\
+          \ execution is done\n#Once the prompt execution is done it downloads the\
+          \ images using the /history endpoint\n\nimport websocket #NOTE: websocket-client\
+          \ (https://github.com/websocket-client/websocket-client)\nimport uuid\n\
+          import json\nimport urllib.request\nimport urllib.parse\n\nserver_address\
+          \ = \"172.16.50.118:8188\"\nclient_id = str(uuid.uuid4())\n\ndef queue_prompt(prompt):\n\
+          \    p = {\"prompt\": prompt, \"client_id\": client_id}\n    data = json.dumps(p).encode('utf-8')\n\
+          \    req =  urllib.request.Request(\"http://{}/prompt\".format(server_address),\
+          \ data=data)\n    return json.loads(urllib.request.urlopen(req).read())\n\
+          \ndef get_image(filename, subfolder, folder_type):\n    data = {\"filename\"\
+          : filename, \"subfolder\": subfolder, \"type\": folder_type}\n    url_values\
+          \ = urllib.parse.urlencode(data)\n    with urllib.request.urlopen(\"http://{}/view?{}\"\
+          .format(server_address, url_values)) as response:\n        return response.read()\n\
+          \ndef get_history(prompt_id):\n    with urllib.request.urlopen(\"http://{}/history/{}\"\
+          .format(server_address, prompt_id)) as response:\n        return json.loads(response.read())\n\
+          \ndef get_images(ws, prompt):\n    prompt_id = queue_prompt(prompt)['prompt_id']\n\
+          \    output_images = {}\n    while True:\n        out = ws.recv()\n    \
+          \    if isinstance(out, str):\n            message = json.loads(out)\n \
+          \           if message['type'] == 'executing':\n                data = message['data']\n\
+          \                if data['node'] is None and data['prompt_id'] == prompt_id:\n\
+          \                    break #Execution is done\n        else:\n         \
+          \   # If you want to be able to decode the binary stream for latent previews,\
+          \ here is how you can do it:\n            # bytesIO = BytesIO(out[8:])\n\
+          \            # preview_image = Image.open(bytesIO) # This is your preview\
+          \ in PIL image format, store it in a global\n            continue #previews\
+          \ are binary data\n\n    history = get_history(prompt_id)[prompt_id]\n \
+          \   for node_id in history['outputs']:\n        node_output = history['outputs'][node_id]\n\
+          \        images_output = []\n        if 'images' in node_output:\n     \
+          \       for image in node_output['images']:\n                image_data\
+          \ = get_image(image['filename'], image['subfolder'], image['type'])\n  \
+          \              images_output.append(image_data)\n        output_images[node_id]\
+          \ = images_output\n\n    return output_images\n\nwith open(\"tiezhi.json\"\
+          , \"r\", encoding=\"utf-8\") as wfile:\n    workflow_json = wfile.read()\n\
+          \njsonwf = json.loads(workflow_json)\n\n#set the text prompt for our positive\
+          \ CLIPTextEncode\n\n#set the seed for our KSampler node\n\nws = websocket.WebSocket()\n\
+          ws.connect(\"ws://{}/ws?clientId={}\".format(server_address, client_id))\n\
+          images = get_images(ws, jsonwf)\nws.close() # for in case this example is\
+          \ used in an environment where it will be repeatedly called, like in a Gradio\
+          \ app. otherwise, you'll randomly receive connection timeouts\n#Commented\
+          \ out code to display the output images:\n\nfor node_id in images:\n   \
+          \ for image_data in images[node_id]:\n        from PIL import Image\n  \
+          \      import io\n        image = Image.open(io.BytesIO(image_data))\n \
+          \       # image.show()\n        image.save(f\"output-{node_id}.png\")\n\n"
+        code_language: python3
+        desc: ''
+        outputs:
+          result:
+            children: null
+            type: string
+        selected: false
+        title: 代码执行
+        type: code
+        variables: []
+      height: 53
+      id: '1739179617084'
+      position:
+        x: 384
+        y: 282
+      positionAbsolute:
+        x: 384
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 243
+    - data:
+        desc: ''
+        outputs: []
+        selected: true
+        title: 结束
+        type: end
+      height: 53
+      id: '1739179619603'
+      position:
+        x: 688
+        y: 282
+      positionAbsolute:
+        x: 688
+        y: 282
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 243
+    viewport:
+      x: 226
+      y: 134.5
+      zoom: 1

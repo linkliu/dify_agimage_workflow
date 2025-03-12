@@ -1,0 +1,424 @@
+app:
+  description: 生成房间内的背景
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  mode: workflow
+  name: ' 房间背景工作流'
+  use_icon_as_answer_icon: false
+kind: app
+version: 0.1.5
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInIteration: false
+        sourceType: start
+        targetType: tool
+      id: 1740137700147-source-1740450559590-target
+      source: '1740137700147'
+      sourceHandle: source
+      target: '1740450559590'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: start
+        targetType: code
+      id: 1740137700147-source-1740454414759-target
+      selected: false
+      source: '1740137700147'
+      sourceHandle: source
+      target: '1740454414759'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: code
+        targetType: http-request
+      id: 1740454414759-source-1740454446854-target
+      selected: false
+      source: '1740454414759'
+      sourceHandle: source
+      target: '1740454446854'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: http-request
+        targetType: code
+      id: 1740454446854-source-1740454749014-target
+      selected: false
+      source: '1740454446854'
+      sourceHandle: source
+      target: '1740454749014'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: code
+        targetType: end
+      id: 1740454749014-source-1740137702086-target
+      source: '1740454749014'
+      sourceHandle: source
+      target: '1740137702086'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: tool
+        targetType: code
+      id: 1740450559590-source-1740455279494-target
+      source: '1740450559590'
+      sourceHandle: source
+      target: '1740455279494'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: code
+        targetType: http-request
+      id: 1740455279494-source-1740454446854-target
+      source: '1740455279494'
+      sourceHandle: source
+      target: '1740454446854'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        desc: ''
+        selected: false
+        title: 开始
+        type: start
+        variables:
+        - allowed_file_extensions: []
+          allowed_file_types:
+          - image
+          allowed_file_upload_methods:
+          - local_file
+          - remote_url
+          label: 主题
+          max_length: 2048
+          options: []
+          required: true
+          type: paragraph
+          variable: theme
+      height: 90
+      id: '1740137700147'
+      position:
+        x: 30
+        y: 268
+      positionAbsolute:
+        x: 30
+        y: 268
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        outputs:
+        - value_selector:
+          - '1740454749014'
+          - result
+          variable: result
+        selected: false
+        title: 结束
+        type: end
+      height: 90
+      id: '1740137702086'
+      position:
+        x: 1550
+        y: 268
+      positionAbsolute:
+        x: 1550
+        y: 268
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        provider_id: 33192eee-1b01-4896-98bf-bc3bd245d036
+        provider_name: 提示词增强工具
+        provider_type: workflow
+        selected: true
+        title: 提示词增强工具
+        tool_configurations: {}
+        tool_label: 提示词增强工具
+        tool_name: prompt_enhance
+        tool_parameters:
+          input_prompt:
+            type: mixed
+            value: 酒馆场景，焦点清晰，景深逼真，{{#1740137700147.theme#}}
+        type: tool
+      height: 54
+      id: '1740450559590'
+      position:
+        x: 334
+        y: 362
+      positionAbsolute:
+        x: 334
+        y: 362
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        code: "import secrets\ndef main() -> dict:\n    seed = secrets.randbelow(999999999999999)\n\
+          \    return {\"seed\": seed}"
+        code_language: python3
+        desc: ''
+        outputs:
+          seed:
+            children: null
+            type: number
+        selected: false
+        title: 获取种子
+        type: code
+        variables: []
+      height: 54
+      id: '1740454414759'
+      position:
+        x: 623.1289274633447
+        y: 243.62904890117193
+      positionAbsolute:
+        x: 623.1289274633447
+        y: 243.62904890117193
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        authorization:
+          config: null
+          type: no-auth
+        body:
+          data:
+          - id: key-value-1
+            key: ''
+            type: text
+            value: "{\"prompt\":{\n  \"1\": {\n    \"inputs\": {\n      \"seed\":\
+              \ {{#1740454414759.seed#}},\n      \"steps\": 20,\n      \"cfg\": 1,\n\
+              \      \"sampler_name\": \"dpmpp_2m\",\n      \"scheduler\": \"simple\"\
+              ,\n      \"denoise\": 1,\n      \"model\": [\n        \"2\",\n     \
+              \   0\n      ],\n      \"positive\": [\n        \"16\",\n        0\n\
+              \      ],\n      \"negative\": [\n        \"16\",\n        1\n     \
+              \ ],\n      \"latent_image\": [\n        \"8\",\n        0\n      ]\n\
+              \    },\n    \"class_type\": \"KSampler\",\n    \"_meta\": {\n     \
+              \ \"title\": \"K采样器\"\n    }\n  },\n  \"2\": {\n    \"inputs\": {\n\
+              \      \"unet_name\": \"flux1-FP8-dev.safetensors\",\n      \"weight_dtype\"\
+              : \"fp8_e4m3fn\"\n    },\n    \"class_type\": \"UNETLoader\",\n    \"\
+              _meta\": {\n      \"title\": \"UNET加载器\"\n    }\n  },\n  \"3\": {\n\
+              \    \"inputs\": {\n      \"text\": \"{{#1740455279494.prompt#}}\",\n\
+              \      \"clip\": [\n        \"7\",\n        0\n      ]\n    },\n   \
+              \ \"class_type\": \"CLIPTextEncode\",\n    \"_meta\": {\n      \"title\"\
+              : \"正向提示词\"\n    }\n  },\n  \"6\": {\n    \"inputs\": {\n      \"text\"\
+              : \"\",\n      \"clip\": [\n        \"7\",\n        0\n      ]\n   \
+              \ },\n    \"class_type\": \"CLIPTextEncode\",\n    \"_meta\": {\n  \
+              \    \"title\": \"CLIP文本编码器\"\n    }\n  },\n  \"7\": {\n    \"inputs\"\
+              : {\n      \"clip_name1\": \"t5xxl_fp8_e4m3fn.safetensors\",\n     \
+              \ \"clip_name2\": \"clip_l.safetensors\",\n      \"type\": \"flux\"\
+              ,\n      \"device\": \"default\"\n    },\n    \"class_type\": \"DualCLIPLoader\"\
+              ,\n    \"_meta\": {\n      \"title\": \"双CLIP加载器\"\n    }\n  },\n  \"\
+              8\": {\n    \"inputs\": {\n      \"width\": 2008,\n      \"height\"\
+              : 856,\n      \"batch_size\": 1\n    },\n    \"class_type\": \"EmptyLatentImage\"\
+              ,\n    \"_meta\": {\n      \"title\": \"空Latent\"\n    }\n  },\n  \"\
+              9\": {\n    \"inputs\": {\n      \"samples\": [\n        \"1\",\n  \
+              \      0\n      ],\n      \"vae\": [\n        \"10\",\n        0\n \
+              \     ]\n    },\n    \"class_type\": \"VAEDecode\",\n    \"_meta\":\
+              \ {\n      \"title\": \"VAE解码\"\n    }\n  },\n  \"10\": {\n    \"inputs\"\
+              : {\n      \"vae_name\": \"FLUX.1-vae.sft\"\n    },\n    \"class_type\"\
+              : \"VAELoader\",\n    \"_meta\": {\n      \"title\": \"VAE加载器\"\n  \
+              \  }\n  },\n  \"15\": {\n    \"inputs\": {\n      \"control_net_name\"\
+              : \"flux\\\\FLUX.1-dev-ControlNet-Union-Pro.safetensors\"\n    },\n\
+              \    \"class_type\": \"ControlNetLoader\",\n    \"_meta\": {\n     \
+              \ \"title\": \"ControlNet加载器\"\n    }\n  },\n  \"16\": {\n    \"inputs\"\
+              : {\n      \"strength\": 0.8,\n      \"start_percent\": 0,\n      \"\
+              end_percent\": 0.45,\n      \"positive\": [\n        \"3\",\n      \
+              \  0\n      ],\n      \"negative\": [\n        \"6\",\n        0\n \
+              \     ],\n      \"control_net\": [\n        \"17\",\n        0\n   \
+              \   ],\n      \"vae\": [\n        \"10\",\n        0\n      ],\n   \
+              \   \"image\": [\n        \"19\",\n        0\n      ]\n    },\n    \"\
+              class_type\": \"ControlNetApplySD3\",\n    \"_meta\": {\n      \"title\"\
+              : \"ControlNet应用\"\n    }\n  },\n  \"17\": {\n    \"inputs\": {\n  \
+              \    \"type\": \"depth\",\n      \"control_net\": [\n        \"15\"\
+              ,\n        0\n      ]\n    },\n    \"class_type\": \"SetUnionControlNetType\"\
+              ,\n    \"_meta\": {\n      \"title\": \"设置UnionControlNet类型\"\n    }\n\
+              \  },\n  \"18\": {\n    \"inputs\": {\n      \"image\": \"828510a8b8d56442089d7af7016721d65a8a06ae7bf7f-ZmHEF5.png\"\
+              ,\n      \"upload\": \"image\"\n    },\n    \"class_type\": \"LoadImage\"\
+              ,\n    \"_meta\": {\n      \"title\": \"加载图像\"\n    }\n  },\n  \"19\"\
+              : {\n    \"inputs\": {\n      \"preprocessor\": \"Metric3D-DepthMapPreprocessor\"\
+              ,\n      \"resolution\": 512,\n      \"image\": [\n        \"18\",\n\
+              \        0\n      ]\n    },\n    \"class_type\": \"AIO_Preprocessor\"\
+              ,\n    \"_meta\": {\n      \"title\": \"Aux集成预处理器\"\n    }\n  },\n \
+              \ \"21\": {\n    \"inputs\": {\n      \"images\": [\n        \"19\"\
+              ,\n        0\n      ]\n    },\n    \"class_type\": \"PreviewImage\"\
+              ,\n    \"_meta\": {\n      \"title\": \"预览图像\"\n    }\n  },\n  \"28\"\
+              : {\n    \"inputs\": {\n      \"filename_prefix\": \"ComfyUI\",\n  \
+              \    \"images\": [\n        \"9\",\n        0\n      ]\n    },\n   \
+              \ \"class_type\": \"SaveImage\",\n    \"_meta\": {\n      \"title\"\
+              : \"保存图像\"\n    }\n  }\n}\n}"
+          type: json
+        desc: ''
+        headers: Content-Type:application/json
+        method: post
+        params: ''
+        retry_config:
+          max_retries: 3
+          retry_enabled: true
+          retry_interval: 737
+        selected: false
+        timeout:
+          max_connect_timeout: 0
+          max_read_timeout: 0
+          max_write_timeout: 0
+        title: HTTP 请求
+        type: http-request
+        url: http://172.16.50.118:8188/prompt
+        variables: []
+      height: 136
+      id: '1740454446854'
+      position:
+        x: 944.4614964749935
+        y: 268
+      positionAbsolute:
+        x: 944.4614964749935
+        y: 268
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        code: "\nimport json\nimport requests\nimport time\ndef main(body: str) ->\
+          \ dict:\n    data= json.loads(body)\n    prompt_id=data[\"prompt_id\"]\n\
+          \    number=data[\"number\"]\n    images=[]\n    image_urls=[]\n    while\
+          \ True:\n        time.sleep(3)\n        data = requests.get(\"http://172.16.50.118:8188/history/\"\
+          +prompt_id).json()\n        if prompt_id in data:\n            status=data[prompt_id][\"\
+          status\"]\n            if status[\"completed\"] and status[\"status_str\"\
+          ]==\"success\":\n                images=data[prompt_id][\"outputs\"][\"\
+          28\"][\"images\"]\n                break\n        else:\n            continue\n\
+          \    for img in images:\n        image_urls.append(\n            \"http://172.16.50.118:8188/view?filename=\"\
+          +img[\"filename\"]+\"&subfolder=\"+img[\"subfolder\"]+\"&type=output\"\n\
+          \        )\n    return {\n        \"result\": image_urls ,\n    }\n"
+        code_language: python3
+        desc: ''
+        outputs:
+          result:
+            children: null
+            type: array[string]
+        retry_config:
+          max_retries: '10'
+          retry_enabled: true
+          retry_interval: 2078
+        selected: false
+        title: 等待ComfyUI出图
+        type: code
+        variables:
+        - value_selector:
+          - '1740454446854'
+          - body
+          variable: body
+      height: 80
+      id: '1740454749014'
+      position:
+        x: 1246
+        y: 268
+      positionAbsolute:
+        x: 1246
+        y: 268
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        code: "import re\nimport json\ndef main(jsonObj) -> dict:\n    prompt = jsonObj[0][\"\
+          result\"]\n    return {\n        \"prompt\":prompt\n    }"
+        code_language: python3
+        desc: ''
+        outputs:
+          prompt:
+            children: null
+            type: string
+        selected: false
+        title: 获取提示词
+        type: code
+        variables:
+        - value_selector:
+          - '1740450559590'
+          - json
+          variable: jsonObj
+      height: 54
+      id: '1740455279494'
+      position:
+        x: 623.1289274633447
+        y: 362
+      positionAbsolute:
+        x: 623.1289274633447
+        y: 362
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    viewport:
+      x: -117.46416864549371
+      y: 41.43700107584999
+      zoom: 1.06100159655728

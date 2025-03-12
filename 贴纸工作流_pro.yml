@@ -1,0 +1,624 @@
+app:
+  description: 为游戏生成贴纸
+  icon: 5079a0fb-996e-46d4-8a94-ccb9ddaa957b
+  icon_background: '#FFEAD5'
+  mode: workflow
+  name: 贴纸工作流_pro
+  use_icon_as_answer_icon: false
+kind: app
+version: 0.1.5
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInIteration: false
+        sourceType: code
+        targetType: iteration
+      id: 1741350471990-source-1741348963670-target
+      selected: false
+      source: '1741350471990'
+      sourceHandle: source
+      target: '1741348963670'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: start
+        targetType: tool
+      id: 1740137062841-source-1741350787214-target
+      selected: false
+      source: '1740137062841'
+      sourceHandle: source
+      target: '1741350787214'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: tool
+        targetType: code
+      id: 1741350787214-source-1741350471990-target
+      selected: false
+      source: '1741350787214'
+      sourceHandle: source
+      target: '1741350471990'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: true
+        iteration_id: '1741348963670'
+        sourceType: iteration-start
+        targetType: code
+      id: 1741348963670start-source-1741351819087-target
+      selected: false
+      source: 1741348963670start
+      sourceHandle: source
+      target: '1741351819087'
+      targetHandle: target
+      type: custom
+      zIndex: 1002
+    - data:
+        isInIteration: true
+        iteration_id: '1741348963670'
+        sourceType: code
+        targetType: http-request
+      id: 1741351819087-source-1741351857294-target
+      selected: false
+      source: '1741351819087'
+      sourceHandle: source
+      target: '1741351857294'
+      targetHandle: target
+      type: custom
+      zIndex: 1002
+    - data:
+        isInIteration: true
+        iteration_id: '1741348963670'
+        sourceType: http-request
+        targetType: code
+      id: 1741351857294-source-1741351922743-target
+      selected: false
+      source: '1741351857294'
+      sourceHandle: source
+      target: '1741351922743'
+      targetHandle: target
+      type: custom
+      zIndex: 1002
+    - data:
+        isInIteration: true
+        iteration_id: '1741348963670'
+        sourceType: code
+        targetType: http-request
+      id: 1741356198353-source-1741351857294-target
+      source: '1741356198353'
+      sourceHandle: source
+      target: '1741351857294'
+      targetHandle: target
+      type: custom
+      zIndex: 1002
+    - data:
+        isInIteration: true
+        iteration_id: '1741348963670'
+        sourceType: iteration-start
+        targetType: tool
+      id: 1741348963670start-source-1741579919257-target
+      source: 1741348963670start
+      sourceHandle: source
+      target: '1741579919257'
+      targetHandle: target
+      type: custom
+      zIndex: 1002
+    - data:
+        isInIteration: true
+        iteration_id: '1741348963670'
+        sourceType: tool
+        targetType: code
+      id: 1741579919257-source-1741356198353-target
+      source: '1741579919257'
+      sourceHandle: source
+      target: '1741356198353'
+      targetHandle: target
+      type: custom
+      zIndex: 1002
+    - data:
+        isInIteration: false
+        sourceType: iteration
+        targetType: code
+      id: 1741348963670-source-1741592774408-target
+      source: '1741348963670'
+      sourceHandle: source
+      target: '1741592774408'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: code
+        targetType: end
+      id: 1741592774408-source-1740137065182-target
+      source: '1741592774408'
+      sourceHandle: source
+      target: '1740137065182'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        desc: ''
+        selected: false
+        title: 开始
+        type: start
+        variables:
+        - label: 主题
+          max_length: 2048
+          options: []
+          required: true
+          type: paragraph
+          variable: theme
+        - label: num
+          max_length: 48
+          options: []
+          required: true
+          type: number
+          variable: num
+      height: 116
+      id: '1740137062841'
+      position:
+        x: 30
+        y: 495.5
+      positionAbsolute:
+        x: 30
+        y: 495.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        outputs:
+        - value_selector:
+          - '1741592774408'
+          - markdown_imgs
+          variable: result
+        selected: true
+        title: 结束
+        type: end
+      height: 90
+      id: '1740137065182'
+      position:
+        x: 3101.9547903085872
+        y: 495.5
+      positionAbsolute:
+        x: 3101.9547903085872
+        y: 495.5
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        error_handle_mode: continue-on-error
+        height: 591
+        is_parallel: false
+        iterator_selector:
+        - '1741350471990'
+        - jsArray
+        output_selector:
+        - '1741351922743'
+        - result
+        output_type: array[string]
+        parallel_nums: 10
+        selected: false
+        start_node_id: 1741348963670start
+        title: 迭代
+        type: iteration
+        width: 1592.9922801766327
+      height: 591
+      id: '1741348963670'
+      position:
+        x: 938.6316310239213
+        y: 495.5
+      positionAbsolute:
+        x: 938.6316310239213
+        y: 495.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 1593
+      zIndex: 1
+    - data:
+        desc: ''
+        isInIteration: true
+        selected: false
+        title: ''
+        type: iteration-start
+      draggable: false
+      height: 48
+      id: 1741348963670start
+      parentId: '1741348963670'
+      position:
+        x: 24
+        y: 68
+      positionAbsolute:
+        x: 962.6316310239213
+        y: 563.5
+      selectable: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom-iteration-start
+      width: 44
+      zIndex: 1002
+    - data:
+        code: "import re\nimport json\ndef main(jsonObj) -> dict:\n    print(jsonObj[0][\"\
+          result\"])\n    return {\n        \"jsArray\":json.loads(jsonObj[0][\"result\"\
+          ])\n    }"
+        code_language: python3
+        desc: ''
+        outputs:
+          jsArray:
+            children: null
+            type: array[string]
+        selected: false
+        title: 获得贴纸json数组
+        type: code
+        variables:
+        - value_selector:
+          - '1741350787214'
+          - json
+          variable: jsonObj
+      height: 54
+      id: '1741350471990'
+      position:
+        x: 636
+        y: 495.5
+      positionAbsolute:
+        x: 636
+        y: 495.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        provider_id: 2d4114ef-05d3-493b-ae6b-4e22139da4e5
+        provider_name: 贴纸for
+        provider_type: workflow
+        selected: false
+        title: 贴纸for
+        tool_configurations: {}
+        tool_label: 贴纸for
+        tool_name: tiezhi_for
+        tool_parameters:
+          numer:
+            type: variable
+            value:
+            - '1740137062841'
+            - num
+          theme:
+            type: mixed
+            value: '{{#1740137062841.theme#}}'
+        type: tool
+      height: 54
+      id: '1741350787214'
+      position:
+        x: 330.83469061927076
+        y: 495.5
+      positionAbsolute:
+        x: 330.83469061927076
+        y: 495.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        code: "import secrets\ndef main() -> dict:\n    seed = secrets.randbelow(999999999999999)\n\
+          \    return {\"seed\": seed}"
+        code_language: python3
+        desc: ''
+        isInIteration: true
+        iteration_id: '1741348963670'
+        outputs:
+          seed:
+            children: null
+            type: number
+        selected: false
+        title: 获取种子
+        type: code
+        variables: []
+      height: 54
+      id: '1741351819087'
+      parentId: '1741348963670'
+      position:
+        x: 127.12944943670414
+        y: 166.09385394307287
+      positionAbsolute:
+        x: 1065.7610804606254
+        y: 661.5938539430729
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+      zIndex: 1002
+    - data:
+        authorization:
+          config: null
+          type: no-auth
+        body:
+          data:
+          - id: key-value-138
+            key: ''
+            type: text
+            value: "\n{\"prompt\":{\n  \"1\": {\n    \"inputs\": {\n      \"seed\"\
+              : {{#1741351819087.seed#}},\n      \"steps\": 20,\n      \"cfg\": 1,\n\
+              \      \"sampler_name\": \"dpmpp_2m\",\n      \"scheduler\": \"simple\"\
+              ,\n      \"denoise\": 1,\n      \"model\": [\n        \"2\",\n     \
+              \   0\n      ],\n      \"positive\": [\n        \"3\",\n        0\n\
+              \      ],\n      \"negative\": [\n        \"4\",\n        0\n      ],\n\
+              \      \"latent_image\": [\n        \"7\",\n        0\n      ]\n   \
+              \ },\n    \"class_type\": \"KSampler\",\n    \"_meta\": {\n      \"\
+              title\": \"K采样器\"\n    }\n  },\n  \"2\": {\n    \"inputs\": {\n    \
+              \  \"unet_name\": \"flux1-FP8-dev.safetensors\",\n      \"weight_dtype\"\
+              : \"fp8_e4m3fn\"\n    },\n    \"class_type\": \"UNETLoader\",\n    \"\
+              _meta\": {\n      \"title\": \"UNET加载器\"\n    }\n  },\n  \"3\": {\n\
+              \    \"inputs\": {\n      \"text\": \"{{#1741356198353.prompt#}}\",\n\
+              \      \"clip\": [\n        \"6\",\n        0\n      ]\n    },\n   \
+              \ \"class_type\": \"CLIPTextEncode\",\n    \"_meta\": {\n      \"title\"\
+              : \"CLIP文本编码器（正向提示词）\"\n    }\n  },\n  \"4\": {\n    \"inputs\": {\n\
+              \      \"text\": \"\",\n      \"clip\": [\n        \"6\",\n        0\n\
+              \      ]\n    },\n    \"class_type\": \"CLIPTextEncode\",\n    \"_meta\"\
+              : {\n      \"title\": \"CLIP文本编码器\"\n    }\n  },\n  \"6\": {\n    \"\
+              inputs\": {\n      \"clip_name1\": \"t5xxl_fp8_e4m3fn.safetensors\"\
+              ,\n      \"clip_name2\": \"clip_l.safetensors\",\n      \"type\": \"\
+              flux\",\n      \"device\": \"default\"\n    },\n    \"class_type\":\
+              \ \"DualCLIPLoader\",\n    \"_meta\": {\n      \"title\": \"双CLIP加载器\"\
+              \n    }\n  },\n  \"7\": {\n    \"inputs\": {\n      \"width\": 1024,\n\
+              \      \"height\": 1024,\n      \"batch_size\": 1\n    },\n    \"class_type\"\
+              : \"EmptyLatentImage\",\n    \"_meta\": {\n      \"title\": \"空Latent\"\
+              \n    }\n  },\n  \"8\": {\n    \"inputs\": {\n      \"samples\": [\n\
+              \        \"1\",\n        0\n      ],\n      \"vae\": [\n        \"9\"\
+              ,\n        0\n      ]\n    },\n    \"class_type\": \"VAEDecode\",\n\
+              \    \"_meta\": {\n      \"title\": \"VAE解码\"\n    }\n  },\n  \"9\"\
+              : {\n    \"inputs\": {\n      \"vae_name\": \"FLUX.1-vae.sft\"\n   \
+              \ },\n    \"class_type\": \"VAELoader\",\n    \"_meta\": {\n      \"\
+              title\": \"VAE加载器\"\n    }\n  },\n  \"10\": {\n    \"inputs\": {\n \
+              \     \"filename_prefix\": \"ComfyUI\",\n      \"images\": [\n     \
+              \   \"8\",\n        0\n      ]\n    },\n    \"class_type\": \"SaveImage\"\
+              ,\n    \"_meta\": {\n      \"title\": \"保存图像\"\n    }\n  }\n}\n}"
+          type: json
+        desc: ''
+        headers: Content-Type:application/json
+        isInIteration: true
+        iteration_id: '1741348963670'
+        method: post
+        params: ''
+        retry_config:
+          max_retries: 10
+          retry_enabled: false
+          retry_interval: 3040
+        selected: false
+        timeout:
+          connect: 300
+          max_connect_timeout: 0
+          max_read_timeout: 0
+          max_write_timeout: 0
+        title: HTTP 请求
+        type: http-request
+        url: http://172.16.50.118:8188/prompt
+        variables: []
+      height: 110
+      id: '1741351857294'
+      parentId: '1741348963670'
+      position:
+        x: 666.3964510842229
+        y: 65
+      positionAbsolute:
+        x: 1605.0280821081442
+        y: 560.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+      zIndex: 1002
+    - data:
+        code: "\nimport json\nimport requests\nimport time\ndef main(body: str) ->\
+          \ dict:\n    data= json.loads(body)\n    prompt_id=data[\"prompt_id\"]\n\
+          \    number=data[\"number\"]\n    images=[]\n    image_urls=[]\n    while\
+          \ True:\n        time.sleep(1)\n        data = requests.get(\"http://172.16.50.118:8188/history/\"\
+          +prompt_id).json()\n        if prompt_id in data:\n            status=data[prompt_id][\"\
+          status\"]\n            if status[\"completed\"] and status[\"status_str\"\
+          ]==\"success\":\n                images=data[prompt_id][\"outputs\"][\"\
+          10\"][\"images\"]\n                break\n        else:\n            continue\n\
+          \    for img in images:\n        image_urls.append(\n            \"http://172.16.50.118:8188/view?filename=\"\
+          +img[\"filename\"]+\"&subfolder=\"+img[\"subfolder\"]+\"&type=output\"\n\
+          \        )\n    return {\n        \"result\": image_urls ,\n    }\n"
+        code_language: python3
+        desc: ''
+        isInIteration: true
+        iteration_id: '1741348963670'
+        outputs:
+          result:
+            children: null
+            type: array[string]
+        retry_config:
+          max_retries: 10
+          retry_enabled: true
+          retry_interval: 2568
+        selected: false
+        title: 等待ComfyUI出图
+        type: code
+        variables:
+        - value_selector:
+          - '1741351857294'
+          - body
+          variable: body
+      height: 80
+      id: '1741351922743'
+      parentId: '1741348963670'
+      position:
+        x: 1030.9922801766327
+        y: 65
+      positionAbsolute:
+        x: 1969.623911200554
+        y: 560.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+      zIndex: 1002
+    - data:
+        code: "import re\nimport json\ndef main(jsonObj) -> dict:\n    prompt = jsonObj[0][\"\
+          result\"]\n    return {\n        \"prompt\":prompt\n    }"
+        code_language: python3
+        desc: ''
+        isInIteration: true
+        iteration_id: '1741348963670'
+        outputs:
+          prompt:
+            children: null
+            type: string
+        selected: false
+        title: 获取提示词
+        type: code
+        variables:
+        - value_selector:
+          - '1741579919257'
+          - json
+          variable: jsonObj
+      height: 54
+      id: '1741356198353'
+      parentId: '1741348963670'
+      position:
+        x: 381.62734662449134
+        y: 275.5048652089954
+      positionAbsolute:
+        x: 1320.2589776484126
+        y: 771.0048652089954
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+      zIndex: 1002
+    - data:
+        desc: ''
+        isInIteration: true
+        iteration_id: '1741348963670'
+        provider_id: b91fa2c6-9423-4da2-8153-d9a8285b86bf
+        provider_name: 提示词增强-贴纸
+        provider_type: workflow
+        selected: false
+        title: 提示词增强-贴纸
+        tool_configurations: {}
+        tool_label: 提示词增强-贴纸
+        tool_name: prompt_enhance_tie
+        tool_parameters:
+          input_prompt:
+            type: mixed
+            value: '{{#1741348963670.item#}}，{{#1740137062841.theme#}}'
+        type: tool
+      height: 54
+      id: '1741579919257'
+      parentId: '1741348963670'
+      position:
+        x: 93.15286778010613
+        y: 309.3726179302224
+      positionAbsolute:
+        x: 1031.7844988040274
+        y: 804.8726179302224
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+      zIndex: 1002
+    - data:
+        code: "import re\ndef main(imgs_array) -> dict:\n    markdown_img_strs = \"\
+          \"\n    for url in imgs_array:\n        img = f\"![image]({url})\"\n   \
+          \     if markdown_img_strs:\n            markdown_img_strs += \"，\"\n  \
+          \      markdown_img_strs += img\n    return {\n        \"markdown_imgs\"\
+          :markdown_img_strs\n    }"
+        code_language: python3
+        desc: ''
+        outputs:
+          markdown_imgs:
+            children: null
+            type: string
+        selected: false
+        title: markdown_image
+        type: code
+        variables:
+        - value_selector:
+          - '1741348963670'
+          - output
+          variable: imgs_array
+      height: 54
+      id: '1741592774408'
+      position:
+        x: 2624.4310064967967
+        y: 500.9132734518229
+      positionAbsolute:
+        x: 2624.4310064967967
+        y: 500.9132734518229
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    viewport:
+      x: -2097.814140990332
+      y: -285.6208896827744
+      zoom: 0.9236555375410278
